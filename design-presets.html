@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){var k='dp-theme',r=document.documentElement,s=localStorage.getItem(k);
+if(s)r.setAttribute('data-theme',s);else if(matchMedia('(prefers-color-scheme:dark)').matches)r.setAttribute('data-theme','dark');
+window.toggleTheme=function(){var d=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',d);localStorage.setItem(k,d);};})();</script>
+<title>디자인 프리셋 갤러리 — 보고 고르고 지시하기</title>
+<meta name="description" content="프리셋마다 같은 미니 랜딩을 렌더해 차이를 눈으로 비교하고 AI에 바로 지시하는 레퍼런스.">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Black+Han+Sans&family=DotGothic16&family=Gaegu:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f1;--card:#fff;--ink:#1a1814;--muted:#7a6e5e;--rule:rgba(26,24,20,.14);--accent:#7a1f2d;
+--soft:color-mix(in oklab,var(--accent) 10%,transparent);
+--fd:'Noto Serif KR',serif;--fb:'IBM Plex Sans KR',-apple-system,sans-serif;--fm:'JetBrains Mono',ui-monospace,monospace;}
+[data-theme=dark]{--bg:#14110d;--card:#1c1814;--ink:#f0ebe2;--muted:#a99f8e;--rule:rgba(240,235,226,.15);--accent:#d4566a;--soft:color-mix(in oklab,var(--accent) 18%,transparent);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased;padding:0 20px 80px;transition:background .3s,color .3s;}
+.wrap{max-width:1180px;margin:0 auto;}
+a{color:inherit;}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
+.brand{font-family:var(--fd);font-weight:700;}.brand .d{color:var(--accent);}
+.bar nav{display:flex;gap:14px;align-items:center;font-size:13px;}
+.tgl{background:none;border:1px solid var(--rule);border-radius:9999px;width:36px;height:36px;cursor:pointer;color:var(--ink);}
+.tgl:hover{border-color:var(--accent);}
+header.h{padding:14px 0 22px;border-bottom:1px solid var(--rule);}
+h1{font-family:var(--fd);font-size:clamp(26px,4.5vw,40px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;}
+.lede{color:var(--muted);font-size:14.5px;max-width:680px;}
+.controls{position:sticky;top:0;background:var(--bg);z-index:6;padding:14px 0;border-bottom:1px solid var(--rule);}
+#q{width:100%;padding:11px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--card);color:var(--ink);font-family:var(--fb);font-size:14px;}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.tab{font-family:var(--fm);font-size:12px;border:1px solid var(--rule);border-radius:9999px;padding:6px 13px;cursor:pointer;background:var(--card);color:var(--muted);}
+.tab.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.famhead{margin:26px 0 4px;font-family:var(--fd);font-weight:700;font-size:19px;}
+.famdesc{color:var(--muted);font-size:13px;margin-bottom:14px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:16px;}
+.pc{background:var(--card);border:1px solid var(--rule);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;}
+.frame{width:100%;height:312px;overflow:hidden;position:relative;background:#0e0e0e;border-bottom:1px solid var(--rule);}
+.frame .mini{position:absolute;top:0;left:50%;transform:translateX(-50%) scale(.70);transform-origin:top center;}
+.meta{padding:14px 15px;display:flex;flex-direction:column;gap:7px;}
+.meta .nm{font-family:var(--fd);font-weight:700;font-size:16px;}
+.meta .en{font-family:var(--fm);font-size:11px;color:var(--muted);}
+.kw{display:flex;flex-wrap:wrap;gap:5px;}
+.kw span{font-family:var(--fm);font-size:10px;background:var(--soft);color:var(--accent);border-radius:5px;padding:2px 7px;}
+.bd{font-size:12px;color:var(--muted);}.bd b{color:var(--ink);font-weight:600;}
+.dont{font-size:11.5px;color:var(--muted);}.dont::before{content:'✕ ';color:#c0463f;}
+.instr{font-size:12px;background:var(--soft);border-left:2px solid var(--accent);padding:7px 9px;border-radius:0 8px 8px 0;}
+.instr b{color:var(--accent);}
+.tok{position:relative;background:color-mix(in oklab,var(--ink) 6%,transparent);border-radius:7px;padding:8px 10px;font-family:var(--fm);font-size:11px;}
+.tok .cp{position:absolute;top:5px;right:5px;font-size:10px;border:1px solid var(--rule);border-radius:5px;padding:1px 6px;cursor:pointer;background:var(--card);color:var(--muted);}
+.src{font-family:var(--fm);font-size:10px;color:var(--muted);}
+.count{color:var(--muted);font-size:12px;font-family:var(--fm);margin:14px 0;}
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--rule);color:var(--muted);font-size:12px;}
+
+/* ================= MINI LANDING SAMPLE (공통) ================= */
+.mini{width:360px;height:446px;background:var(--m-bg,#fff);color:var(--m-ink,#1a1814);
+  font-family:var(--m-body,'IBM Plex Sans KR',sans-serif);border-radius:var(--m-r,14px);overflow:hidden;
+  position:relative;--m-acc:#7a1f2d;--m-mut:#8a8178;--m-card:#f7f5f0;--m-soft:rgba(122,31,45,.1);
+  --m-rs:8px;--m-rb:4px 4px 0 0;--m-sh:none;}
+.mini *{box-sizing:border-box;}
+.mtop{display:flex;align-items:center;gap:7px;padding:13px 18px;border-bottom:1px solid rgba(128,128,128,.18);font-size:12px;}
+.mtop .dot{font-weight:700;}.mtop .dot b{color:var(--m-acc);}
+.mtop .nav{margin-left:auto;display:flex;gap:11px;color:var(--m-mut);font-size:11px;}
+.mtop .mbtn{border:1px solid var(--m-acc);color:var(--m-acc);border-radius:var(--m-rs);padding:3px 9px;font-size:10px;}
+.mhero{padding:22px 18px 4px;}
+.meyebrow{font-family:var(--m-mono,'JetBrains Mono',monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--m-acc);}
+.mini h3{font-family:var(--m-disp,var(--m-body));font-size:27px;line-height:1.07;font-weight:700;margin:8px 0;letter-spacing:-.02em;}
+.msub{font-size:12.5px;color:var(--m-mut);}
+.mbtns{display:flex;gap:8px;margin-top:14px;}
+.mbtns .b1{background:var(--m-acc);color:#fff;border-radius:var(--m-rs);padding:8px 14px;font-size:12px;font-weight:600;box-shadow:var(--m-sh);}
+.mbtns .b2{border:1px solid var(--m-acc);color:var(--m-acc);border-radius:var(--m-rs);padding:8px 14px;font-size:12px;background:transparent;}
+.mstats{display:flex;gap:8px;padding:18px;}
+.mstat{flex:1;}.mstat .v{font-family:var(--m-mono,'JetBrains Mono',monospace);font-size:19px;font-weight:700;}
+.mstat .l{font-size:9.5px;color:var(--m-mut);}
+.mcard{margin:0 18px;padding:13px;border:1px solid rgba(128,128,128,.2);border-radius:var(--m-r);background:var(--m-card);box-shadow:var(--m-sh);}
+.mcard .t{font-weight:600;font-size:13px;}.mcard .d{font-size:11px;color:var(--m-mut);}
+.mtag{display:inline-block;margin-top:7px;background:var(--m-soft);color:var(--m-acc);border-radius:6px;padding:2px 8px;font-size:10px;font-family:var(--m-mono,'JetBrains Mono',monospace);}
+.mbars{display:flex;align-items:flex-end;gap:7px;height:50px;padding:13px 18px 18px;}
+.mbars i{flex:1;background:var(--m-acc);border-radius:var(--m-rb);transform-origin:bottom;}
+
+/* ===== STYLE family (s-*) ===== */
+.s-base{--m-bg:#fff;--m-ink:#1a1814;--m-acc:#7a1f2d;--m-card:#faf7f1;--m-mut:#7a6e5e;}
+.s-mono{--m-bg:#15171c;--m-ink:#e8eaed;--m-acc:#e5575c;--m-card:#1d2026;--m-mut:#9aa0a8;--m-soft:rgba(229,87,92,.14);--m-sh:0 2px 8px rgba(0,0,0,.4);}
+.s-editorial{--m-bg:#fbfaf7;--m-ink:#111;--m-acc:#b3261e;--m-card:#fff;--m-mut:#666;--m-r:0;--m-rs:0;--m-rb:0;}
+.s-editorial h3{font-family:'Noto Serif KR',serif;font-size:31px;}
+.s-editorial .mtop,.s-editorial .mcard{border-color:#111;}
+.s-pixel{--m-bg:#fdf6e3;--m-ink:#1a1a1a;--m-acc:#d6336c;--m-card:#fff;--m-mut:#555;--m-r:0;--m-rs:0;--m-rb:0;--m-sh:4px 4px 0 #1a1a1a;--m-body:'DotGothic16',monospace;--m-disp:'DotGothic16',monospace;--m-mono:'DotGothic16',monospace;}
+.s-pixel .mcard,.s-pixel .mbtns .b1{border:2px solid #1a1a1a;}
+.s-premium{--m-bg:#f3efe7;--m-ink:#26201a;--m-acc:#8a6a3a;--m-card:#fbf8f2;--m-mut:#8c8275;--m-r:18px;--m-rs:11px;--m-sh:0 10px 30px rgba(0,0,0,.10);--m-disp:'Noto Serif KR',serif;}
+.s-premium .mhero{padding:30px 22px 6px;}
+.s-narrative{--m-bg:#faf7f1;--m-ink:#1a1814;--m-acc:#7a1f2d;--m-card:#fff;--m-mut:#7a6e5e;--m-disp:'Noto Serif KR',serif;--m-body:'Noto Serif KR',serif;}
+.s-narrative .mstats,.s-narrative .mbars{display:none;}
+.s-narrative .mhero{padding:26px 26px 10px;}.s-narrative .msub{font-size:13px;line-height:1.8;}
+.s-brutal{--m-bg:#f5f000;--m-ink:#000;--m-acc:#0026ff;--m-card:#fff;--m-mut:#222;--m-r:0;--m-rs:0;--m-rb:0;--m-sh:6px 6px 0 #000;--m-disp:'IBM Plex Sans KR';}
+.s-brutal .mtop,.s-brutal .mcard,.s-brutal .mbtns .b1,.s-brutal .mbtns .b2{border:3px solid #000;}
+.s-brutal h3{font-weight:700;text-transform:uppercase;}
+.s-glass{--m-bg:#dbe6ff;--m-ink:#0e1b33;--m-acc:#3a5bd0;--m-card:rgba(255,255,255,.45);--m-mut:#4a5a78;--m-r:18px;--m-rs:12px;--m-sh:0 8px 30px rgba(40,60,120,.18);}
+.s-glass{background:linear-gradient(140deg,#cfe0ff,#e7d6ff 60%,#ffd9ec);}
+.s-glass .mcard,.s-glass .mtop{backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.6);}
+.s-terracotta{--m-bg:#f6ede4;--m-ink:#3a2a20;--m-acc:#c4602f;--m-card:#fffaf4;--m-mut:#977f6c;--m-r:16px;--m-rs:10px;--m-sh:0 4px 14px rgba(150,90,40,.12);}
+.s-darktech{--m-bg:#0a0e14;--m-ink:#d6f5ff;--m-acc:#00e0c6;--m-card:#10161f;--m-mut:#6b8390;--m-soft:rgba(0,224,198,.14);--m-r:10px;--m-rs:7px;--m-sh:0 0 16px rgba(0,224,198,.25);--m-mono:'JetBrains Mono',monospace;--m-body:'JetBrains Mono',monospace;}
+.s-darktech h3{text-shadow:0 0 14px rgba(0,224,198,.4);}
+.s-candy{--m-bg:#fff0f6;--m-ink:#5b2348;--m-acc:#ff4d9d;--m-card:#fff;--m-mut:#b07a98;--m-r:22px;--m-rs:9999px;--m-rb:9px 9px 0 0;--m-sh:0 6px 18px rgba(255,77,157,.22);}
+.s-candy .mbtns .b1{background:linear-gradient(90deg,#ff7eb3,#ff4d9d);}
+.s-sketch{--m-bg:#fcfbf7;--m-ink:#2b2b2b;--m-acc:#c2410c;--m-card:#fff;--m-mut:#777;--m-r:14px;--m-rs:10px;--m-disp:'Gaegu',cursive;--m-body:'Gaegu',cursive;}
+.s-sketch .mtop,.s-sketch .mcard,.s-sketch .mbtns .b1,.s-sketch .mbtns .b2{border:2px dashed #2b2b2b;}
+.s-swiss{--m-bg:#fff;--m-ink:#111;--m-acc:#e8330a;--m-card:#f4f4f4;--m-mut:#888;--m-r:0;--m-rs:0;--m-rb:0;}
+.s-swiss .mhero{padding:26px 18px 4px;}.s-swiss h3{font-weight:700;letter-spacing:-.03em;}
+
+/* ===== SITE systems (실토큰, awesome-design-md MIT) ===== */
+.s-claude{--m-bg:#f5f4ed;--m-ink:#141413;--m-acc:#c96442;--m-card:#faf9f5;--m-mut:#5e5d59;--m-soft:rgba(201,100,66,.12);--m-r:16px;--m-rs:10px;--m-sh:0 0 0 1px #e8e6dc;--m-disp:'Noto Serif KR',serif;}
+.s-claude h3{font-weight:700;}
+.s-stripe{--m-bg:#fff;--m-ink:#061b31;--m-acc:#533afd;--m-card:#fff;--m-mut:#64748d;--m-soft:rgba(83,58,253,.1);--m-r:8px;--m-rs:4px;--m-rb:0;--m-sh:rgba(50,50,93,.18) 0 12px 28px -12px,rgba(0,0,0,.1) 0 8px 18px -10px;}
+.s-stripe h3{font-weight:300;letter-spacing:-.03em;}
+.s-linear{--m-bg:#08090a;--m-ink:#f7f8f8;--m-acc:#5e6ad2;--m-card:rgba(255,255,255,.03);--m-mut:#8a8f98;--m-soft:rgba(94,106,210,.2);--m-r:8px;--m-rs:6px;}
+.s-linear .mtop,.s-linear .mcard{border-color:rgba(255,255,255,.08);}
+.s-linear h3{font-weight:600;letter-spacing:-.03em;}
+.s-linear .mbtns .b2{border-color:rgba(255,255,255,.14);}
+.s-apple{--m-bg:#fbfbfd;--m-ink:#1d1d1f;--m-acc:#0071e3;--m-card:#f5f5f7;--m-mut:#6e6e73;--m-soft:rgba(0,113,227,.1);--m-r:18px;--m-rs:980px;--m-sh:0 18px 40px -20px rgba(0,0,0,.16);--m-disp:-apple-system,'SF Pro Display','Pretendard',sans-serif;}
+.s-apple h3{font-weight:700;letter-spacing:-.03em;}
+
+/* ===== PALETTE family (pal-*) on neutral base ===== */
+.pal-deepblue{--m-acc:#2f5fae;--m-soft:rgba(47,95,174,.12);}
+.pal-terracotta{--m-acc:#c4602f;--m-soft:rgba(196,96,47,.12);}
+.pal-monochrome{--m-acc:#222;--m-soft:rgba(0,0,0,.08);}
+.pal-violet{--m-acc:#6c4ad0;--m-soft:rgba(108,74,208,.13);}
+
+/* ===== FONT family (font-*) ===== */
+.font-gothic{--m-disp:'IBM Plex Sans KR';--m-body:'IBM Plex Sans KR';}
+.font-serif{--m-disp:'Noto Serif KR',serif;--m-body:'Noto Serif KR',serif;}
+.font-display{--m-disp:'Black Han Sans',sans-serif;}
+.font-display h3{font-weight:400;}
+.font-mono{--m-disp:'JetBrains Mono',monospace;--m-body:'JetBrains Mono',monospace;}
+
+/* ===== ARCHETYPE family (arch-*) — 레이아웃 강조 차이 ===== */
+.arch-narrative{--m-disp:'Noto Serif KR',serif;--m-body:'Noto Serif KR',serif;}
+.arch-narrative .mstats,.arch-narrative .mbars{display:none;}
+.arch-narrative .mhero{padding:26px 26px 12px;}.arch-narrative .msub{line-height:1.9;font-size:13px;}
+.arch-reference .mhero{padding:16px 18px 2px;}.arch-reference h3{font-size:20px;}
+.arch-reference .mbars{display:none;}
+.arch-reference .mstats{flex-wrap:wrap;}
+.arch-visual .mhero{padding:40px 18px 8px;}.arch-visual h3{font-size:36px;}
+.arch-visual .mtop{opacity:.5;}
+.arch-procedural .mhero{padding:16px 18px 2px;}
+.arch-procedural .mstat .v::before{content:'0' counter(s) '  ';counter-increment:s;color:var(--m-acc);}
+.arch-procedural .mstats{counter-reset:s;}
+
+/* ===== MOTION family (mot-*) ===== */
+.mot-lively .mbars i{animation:dpbar 1.6s ease-in-out infinite alternate;}
+.mot-lively .mbars i:nth-child(2){animation-delay:.18s}.mot-lively .mbars i:nth-child(3){animation-delay:.36s}.mot-lively .mbars i:nth-child(4){animation-delay:.54s}.mot-lively .mbars i:nth-child(5){animation-delay:.72s}
+.mot-lively .mbtns .b1{animation:dpglow 1.8s ease-in-out infinite;}
+@keyframes dpbar{from{transform:scaleY(.45)}to{transform:scaleY(1)}}
+@keyframes dpglow{0%,100%{box-shadow:0 0 0 rgba(122,31,45,0)}50%{box-shadow:0 0 16px var(--m-acc)}}
+.mot-micro .mbtns .b1{transition:transform .18s;}
+.frame:hover .mot-micro .mbtns .b1{transform:translateY(-3px);}
+@media(prefers-reduced-motion:reduce){.mot-lively .mbars i,.mot-lively .mbtns .b1{animation:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <span class="brand">Vibe Design Studio<span class="d"> · 프리셋</span></span>
+    <nav><a href="design-studio.html">스튜디오</a><a href="design-catalog.html">카탈로그</a><a href="design-effects.html">효과</a><a href="design-systems.html">시스템</a><a href="design-references.html">레퍼런스</a>
+      <a href="https://github.com/ljhljh0703-cmd/VDS" target="_blank" rel="noopener" style="border:1px solid currentColor;border-radius:999px;padding:3px 11px;font-weight:700;text-decoration:none;white-space:nowrap">GitHub ↗</a><button class="tgl" onclick="toggleTheme()" aria-label="라이트/다크 전환">◐</button></nav>
+  </div>
+  <header class="h">
+    <h1>디자인 프리셋 갤러리</h1>
+    <p class="lede">같은 미니 랜딩을 프리셋마다 렌더했어요. 눈으로 비교하고 카드의 <b>“이렇게 지시”</b> 문구·토큰을 그대로 주면 AI가 그 톤으로 만들어요.</p>
+  </header>
+  <div class="controls">
+    <input id="q" type="search" placeholder="검색 — 프리셋 이름·키워드·용도 (예: 픽셀, 격식, 다크, 게임, 세리프)">
+    <div class="tabs" id="tabs"></div>
+  </div>
+  <div class="count" id="count"></div>
+  <div id="out"></div>
+  <footer>같은 미니 랜딩을 33개 프리셋으로 라이브 비교. © 2026 이주형 · Vibe Design Studio.</footer>
+</div>
+<script>
+const SAMPLE=`<div class="mtop"><span class="dot">Brand<b>.</b></span><span class="nav"><span>Work</span><span>About</span></span><span class="mbtn">Contact</span></div>
+<div class="mhero"><div class="meyebrow">Knowledge OS</div><h3>학습을 시스템으로</h3><div class="msub">매일의 학습을 구조로 흡수하는 지식 운영체계.</div><div class="mbtns"><span class="b1">시작하기</span><span class="b2">자세히</span></div></div>
+<div class="mstats"><div class="mstat"><div class="v">981</div><div class="l">노드</div></div><div class="mstat"><div class="v">1,293</div><div class="l">연결</div></div><div class="mstat"><div class="v">154</div><div class="l">군집</div></div></div>
+<div class="mcard"><div class="t">Sub-brain</div><div class="d">게이트로 품질을 지키는 개인 지식 그래프.</div><span class="mtag">#knowledge</span></div>
+<div class="mbars"><i style="height:40%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:65%"></i></div>`;
+
+const FAM={style:"스타일 — 전체 톤(우리 시스템 + 차용 이디엄)",palette:"팔레트 — 액센트 색 (data-palette)",font:"폰트 — 디스플레이/본문 (data-font)",archetype:"아키타입 — 레이아웃 성격 (html-publish)",theme:"테마 — 라이트/다크",motion:"모션 — 강도"};
+
+const DATA=[
+// style (ours)
+{id:"s-mono",fam:"style",nm:"모노크롬",en:"monochrome",cls:"s-mono",kw:["흑백","미니멀","고대비","격식"],best:"포폴·이력서·격식",dont:"화려·다색·네온",instr:"“모노크롬(흑백 미니멀)으로”",tok:"style: monochrome",src:"design-engine/styles.csv · ParkDal SSOT"},
+{id:"s-editorial",fam:"style",nm:"에디토리얼 그리드",en:"editorial-grid",cls:"s-editorial",kw:["매거진","그리드","강한타이포","세리프"],best:"외부공유·문서·블로그",dont:"산만·중앙정렬 남발",instr:"“에디토리얼(매거진 그리드)로”",tok:"style: editorial-grid",src:"styles.csv · editorial-grid-design-canon"},
+{id:"s-pixel",fam:"style",nm:"픽셀/레트로",en:"pixel",cls:"s-pixel",kw:["레트로","하드섀도우","도트","게임"],best:"게임UI·인디·레트로",dont:"둥근모서리·블러·AA",instr:"“픽셀/레트로 톤으로(하드섀도우)”",tok:"style: pixel",src:"styles.csv · comnyang-landing-teardown"},
+{id:"s-premium",fam:"style",nm:"프리미엄",en:"premium",cls:"s-premium",kw:["고급","여백","세리프","은은한 깊이"],best:"PPT·프리미엄 HTML",dont:"저렴·과밀·날카로움",instr:"“프리미엄(여백·세리프·소프트섀도우)으로”",tok:"style: premium",src:"styles.csv · parkdal-premium-template"},
+{id:"s-narrative",fam:"style",nm:"내러티브",en:"narrative",cls:"s-narrative",kw:["서사","본문중심","reading","세리프"],best:"케이스스터디·에세이",dont:"UI 과밀·짧은 줄",instr:"“내러티브(읽기 흐름 중심)로”",tok:"style: narrative",src:"styles.csv · html-publish narrative"},
+// style (borrowed idioms)
+{id:"s-brutal",fam:"style",nm:"뉴브루탈리즘",en:"neo-brutalism",cls:"s-brutal",kw:["굵은 테두리","원색","오프셋 섀도우"],best:"개성·랜딩·임팩트",dont:"섬세·저대비·소심",instr:"“뉴브루탈리즘(두꺼운 검정 테두리+오프셋)으로”",tok:"style: neo-brutalism (차용)",src:"차용 이디엄(general)"},
+{id:"s-glass",fam:"style",nm:"글래스모피즘",en:"glassmorphism",cls:"s-glass",kw:["반투명","블러","그라데이션","부드러움"],best:"히어로·앱·모던",dont:"저대비 텍스트·과밀",instr:"“글래스(반투명 블러 카드)로”",tok:"style: glassmorphism (차용)",src:"차용 이디엄(general)"},
+{id:"s-terracotta",fam:"style",nm:"테라코타 웜",en:"terracotta",cls:"s-terracotta",kw:["따뜻","흙빛","친근","둥금"],best:"초대장·브랜드·소셜",dont:"차가움·기계적",instr:"“테라코타(따뜻한 흙빛)로”",tok:"style: terracotta (차용)",src:"차용 · _tokens warm-terracotta 연계"},
+{id:"s-darktech",fam:"style",nm:"다크 테크",en:"dark-tech",cls:"s-darktech",kw:["근블랙","네온","글로우","모노"],best:"개발툴·대시보드·SaaS",dont:"파스텔·세리프·과한 장식",instr:"“다크 테크(네온 글로우)로”",tok:"style: dark-tech (차용)",src:"차용 이디엄(general)"},
+{id:"s-candy",fam:"style",nm:"캔디 플레이풀",en:"candy",cls:"s-candy",kw:["파스텔","아주 둥금","경쾌"],best:"이벤트·키즈·캐주얼",dont:"격식·고대비·기업",instr:"“캔디(파스텔·둥글둥글 경쾌)로”",tok:"style: candy (차용)",src:"차용 이디엄(general)"},
+{id:"s-sketch",fam:"style",nm:"스케치 핸드드로운",en:"sketch",cls:"s-sketch",kw:["손글씨","점선","러프"],best:"와이어프레임·교육·친근",dont:"정밀·기업·고정밀",instr:"“스케치(손글씨·점선)로”",tok:"style: sketch (차용)",src:"차용 · TypeUI sketch 참고"},
+{id:"s-swiss",fam:"style",nm:"스위스/미니멀",en:"swiss",cls:"s-swiss",kw:["여백","그리드","산세리프","빨강 포인트"],best:"기업·정보·클린",dont:"장식·곡선 남발",instr:"“스위스 스타일(여백·그리드·산세리프)로”",tok:"style: swiss (차용)",src:"차용 이디엄(general)"},
+// site systems (실토큰 — awesome-design-md MIT)
+{id:"s-claude",fam:"style",nm:"Claude (Anthropic)",en:"warm editorial",cls:"s-claude",kw:["파치먼트","테라코타","serif","ring-shadow"],best:"AI·에디토리얼·따뜻한 브랜드",dont:"쿨 그레이·sharp·serif 700",instr:"“Claude(Anthropic) 톤 — 파치먼트+테라코타 에디토리얼”",tok:"bg#f5f4ed acc#c96442 serif500 ring-shadow",src:"awesome-design-md(MIT)·Claude DESIGN.md"},
+{id:"s-stripe",fam:"style",nm:"Stripe",en:"premium fintech",cls:"s-stripe",kw:["네이비","퍼플","weight300","blue-shadow"],best:"핀테크·프리미엄·신뢰",dont:"굵은 헤드·pill·뉴트럴 그림자",instr:"“Stripe 톤 — 네이비+퍼플·weight 300·blue-tinted shadow”",tok:"navy#061b31 purple#533afd w300 radius4",src:"awesome-design-md(MIT)·Stripe DESIGN.md"},
+{id:"s-linear",fam:"style",nm:"Linear",en:"dark-native precise",cls:"s-linear",kw:["다크네이티브","인디고","반투명보더","Inter510"],best:"개발툴·대시보드·정밀",dont:"순백텍스트·솔리드 다크보더·700",instr:"“Linear 톤 — 다크네이티브+인디고·반투명 화이트 보더”",tok:"bg#08090a indigo#5e6ad2 translucent-borders",src:"awesome-design-md(MIT)·Linear DESIGN.md"},
+{id:"s-apple",fam:"style",nm:"Apple 그래머",en:"apple product",cls:"s-apple",kw:["여백","한화면한메시지","SF Pro","pill CTA"],best:"제품 출시·프리미엄 랜딩",dont:"과밀·다색·작은 여백·작은 헤드",instr:"“Apple 톤 — 여백·거대 헤드·블루 액센트·pill 버튼”",tok:"bg#fbfbfd acc#0071e3 system-font 여백↑",src:"apple-design-teardown · 문법 차용"},
+// palette
+{id:"pal-deepblue",fam:"palette",nm:"딥 블루",en:"deep-blue",cls:"s-base pal-deepblue",kw:["신뢰","프리미엄 표준"],best:"기본·신뢰",dont:"-",instr:"“팔레트 deep-blue로”",tok:'data-palette="deep-blue"',src:"_tokens.css"},
+{id:"pal-terracotta",fam:"palette",nm:"웜 테라코타",en:"warm-terracotta",cls:"s-base pal-terracotta",kw:["따뜻","서사","작가성"],best:"작가성·서사",dont:"-",instr:"“팔레트 warm-terracotta로”",tok:'data-palette="warm-terracotta"',src:"_tokens.css"},
+{id:"pal-monochrome",fam:"palette",nm:"모노크롬",en:"monochrome",cls:"s-base pal-monochrome",kw:["흑백","탐미","강렬"],best:"미니멀·격식",dont:"-",instr:"“팔레트 monochrome으로”",tok:'data-palette="monochrome"',src:"_tokens.css"},
+{id:"pal-violet",fam:"palette",nm:"크리에이터 바이올렛",en:"creator-violet",cls:"s-base pal-violet",kw:["보라","청록","창작자"],best:"창작·AI 정체성",dont:"-",instr:"“팔레트 creator-violet로”",tok:'data-palette="creator-violet"',src:"_tokens.css"},
+// font
+{id:"font-gothic",fam:"font",nm:"고딕(기본)",en:"gothic",cls:"s-base font-gothic",kw:["안전","가독","범용"],best:"기본·UI",dont:"-",instr:"“폰트 gothic으로”",tok:'data-font="gothic"',src:"_tokens.css"},
+{id:"font-serif",fam:"font",nm:"세리프(명조)",en:"serif",cls:"s-base font-serif",kw:["명조","출판","서사"],best:"소설·에세이·격식",dont:"-",instr:"“폰트 serif(명조)로”",tok:'data-font="serif"',src:"_tokens.css"},
+{id:"font-display",fam:"font",nm:"디스플레이",en:"display",cls:"s-base font-display",kw:["블랙","임팩트","강연"],best:"임팩트 헤딩",dont:"본문 과용",instr:"“헤딩 display(블랙)로”",tok:'data-font="display"',src:"_tokens.css"},
+{id:"font-mono",fam:"font",nm:"모노",en:"mono",cls:"s-base font-mono",kw:["코드","기술문서"],best:"기술·코드",dont:"긴 본문",instr:"“폰트 mono로”",tok:'data-font="mono"',src:"_tokens.css"},
+// archetype
+{id:"arch-narrative",fam:"archetype",nm:"내러티브",en:"narrative",cls:"s-base arch-narrative",kw:["본문중심","reading"],best:"케이스스터디·에세이",dont:"UI 과밀",instr:"“아키타입 narrative로”",tok:"archetype: narrative",src:"templates/html/archetypes"},
+{id:"arch-reference",fam:"archetype",nm:"레퍼런스",en:"reference",cls:"s-base arch-reference",kw:["색인","카드","문서"],best:"문서·인덱스",dont:"긴 서사",instr:"“아키타입 reference로”",tok:"archetype: reference",src:"templates/html/archetypes"},
+{id:"arch-visual",fam:"archetype",nm:"비주얼 스크롤 딥",en:"visual-scroll-deep",cls:"s-base arch-visual",kw:["큰 히어로","스크롤","임팩트"],best:"포폴·랜딩",dont:"정보 과밀",instr:"“아키타입 visual-scroll-deep로”",tok:"archetype: visual-scroll-deep",src:"templates/html/archetypes"},
+{id:"arch-procedural",fam:"archetype",nm:"프로시저럴",en:"procedural",cls:"s-base arch-procedural",kw:["단계","번호","절차"],best:"가이드·튜토리얼",dont:"서사·감성",instr:"“아키타입 procedural로”",tok:"archetype: procedural",src:"templates/html/archetypes"},
+// theme
+{id:"theme-light",fam:"theme",nm:"라이트",en:"light",cls:"s-base",kw:["밝음","기본"],best:"문서·주간",dont:"-",instr:"“라이트 모드로”",tok:'data-theme="light"',src:"DESIGN-SYSTEM.md"},
+{id:"theme-dark",fam:"theme",nm:"다크",en:"dark",cls:"s-mono",kw:["어두움","집중"],best:"개발·야간·임팩트",dont:"-",instr:"“다크 모드로”",tok:'data-theme="dark"',src:"DESIGN-SYSTEM.md"},
+// motion
+{id:"mot-static",fam:"motion",nm:"정적",en:"static",cls:"s-base mot-static",kw:["무모션","인쇄안전"],best:"격식·인쇄·접근성",dont:"-",instr:"“모션 없이(정적)”",tok:"motion: static",src:"design-catalog motion"},
+{id:"mot-micro",fam:"motion",nm:"마이크로(호버)",en:"micro",cls:"s-base mot-micro",kw:["1회성","호버","절제"],best:"포폴·기업",dont:"무한·산만",instr:"“마이크로모션만(호버·1회)”",tok:"motion: micro",src:"design-catalog · 카드에 hover 시 동작"},
+{id:"mot-lively",fam:"motion",nm:"라이블리",en:"lively",cls:"s-base mot-lively",kw:["지속","생동","임팩트"],best:"히어로·데모",dont:"가독 방해·전역 남발",instr:"“라이블리(생동감 있게)”",tok:"motion: lively",src:"design-catalog · 브랜드 모티프 한정"},
+];
+
+let fFam="style", fQ="";
+const fams=Object.keys(FAM);
+const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function tabs(){document.getElementById("tabs").innerHTML=fams.map(f=>`<span class="tab ${fFam===f?'on':''}" data-f="${f}">${FAM[f].split(" — ")[0]}</span>`).join("");}
+function match(e){if(fFam&&e.fam!==fFam)return false;
+  if(fQ){const h=(e.nm+" "+e.en+" "+e.kw.join(" ")+" "+e.best+" "+e.instr).toLowerCase();if(!h.includes(fQ.toLowerCase()))return false;}return true;}
+function pcard(e){return `<div class="pc">
+  <div class="frame"><div class="mini ${e.cls}">${SAMPLE}</div></div>
+  <div class="meta">
+    <div><span class="nm">${esc(e.nm)}</span> <span class="en">${esc(e.en)}</span></div>
+    <div class="kw">${e.kw.map(k=>`<span>${esc(k)}</span>`).join("")}</div>
+    <div class="bd"><b>적합</b> ${esc(e.best)}</div>
+    ${e.dont&&e.dont!=="-"?`<div class="dont">${esc(e.dont)}</div>`:""}
+    <div class="instr"><b>이렇게 지시</b> · ${esc(e.instr)}</div>
+    <div class="tok"><button class="cp" onclick="cp(this)">복사</button>${esc(e.tok)}</div>
+    <div class="src">출처 · ${esc(e.src)}</div>
+  </div></div>`;}
+function render(){
+  const list=DATA.filter(match);
+  document.getElementById("count").textContent=`${list.length} 프리셋 · ${FAM[fFam]}`;
+  document.getElementById("out").innerHTML=`<div class="grid">${list.map(pcard).join("")||"<p style='color:var(--muted)'>일치 없음</p>"}</div>`;
+}
+function cp(b){const t=b.parentNode.textContent.replace(/^복사/,"").trim();navigator.clipboard&&navigator.clipboard.writeText(t);b.textContent="✓";setTimeout(()=>b.textContent="복사",1200);}
+document.getElementById("q").addEventListener("input",e=>{fQ=e.target.value; if(fQ){fFam="";} render();});
+document.addEventListener("click",e=>{const t=e.target.closest(".tab");if(!t)return;fFam=t.dataset.f;fQ="";document.getElementById("q").value="";tabs();render();});
+tabs();render();
+</script>
+</body>
+</html>

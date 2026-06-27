@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js');</script>
+<title>Vibe Design Studio</title>
+<meta name="description" content="감각을 시스템으로. 바이브 코더를 위한 디자인 시스템 스튜디오 — 기법 77 · 프리셋 33 · 효과 66 · 참조 시스템 53. 복붙 DESIGN.md·shadcn 토큰 제공.">
+<meta property="og:title" content="Vibe Design Studio">
+<meta property="og:description" content="감각을 시스템으로. 디자인 지식을 제품화한 스튜디오.">
+<meta property="og:image" content="_publish/assets/og.png">
+<link rel="icon" href="_publish/assets/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070810; --bg2:#0c0e1a; --surf:rgba(255,255,255,.04); --surf2:rgba(255,255,255,.06);
+  --ink:#f4f6fb; --mut:#9aa3b7; --sub:#646c82; --line:rgba(255,255,255,.09);
+  --acc:#7c7bff; --acc2:#22d3ee; --acc3:#ff5da2;
+  --fd:'Black Han Sans',sans-serif; --fs:'Noto Serif KR',serif;
+  --fb:'IBM Plex Sans KR',-apple-system,sans-serif; --fm:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+a{color:inherit;text-decoration:none;}
+/* nav */
+.nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(7,8,16,.6);border-bottom:1px solid var(--line);}
+.nav .row{display:flex;align-items:center;justify-content:space-between;height:62px;}
+.brand{font-weight:700;letter-spacing:-.01em;font-size:16px;display:flex;align-items:center;gap:9px;}
+.brand .gem{width:18px;height:18px;border-radius:5px;background:conic-gradient(from 0deg,var(--acc),var(--acc2),var(--acc3),var(--acc));box-shadow:0 0 14px var(--acc);}
+.nav nav{display:flex;gap:20px;align-items:center;font-size:13.5px;color:var(--mut);}
+.nav nav a:hover{color:var(--ink);}
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:10px;padding:10px 18px;font-size:13.5px;font-weight:600;transition:transform .18s,box-shadow .18s,background .18s;}
+.btn.pri{background:linear-gradient(90deg,var(--acc),#5a59ff);color:#fff;box-shadow:0 6px 24px rgba(124,123,255,.4);}
+.btn.pri:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(124,123,255,.55);}
+.btn.gho{border:1px solid var(--line);color:var(--ink);}
+.btn.gho:hover{border-color:var(--acc);transform:translateY(-2px);}
+/* HERO */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(120% 80% at 50% 0%,transparent 40%,var(--bg) 92%);pointer-events:none;}
+.hero .inner{position:relative;z-index:2;width:100%;padding:60px 0;}
+.eyebrow{font-family:var(--fm);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--acc2);}
+h1{font-size:clamp(40px,7.4vw,92px);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin:18px 0 18px;}
+h1 .g{background:linear-gradient(96deg,#fff 10%,var(--acc) 45%,var(--acc2) 75%,var(--acc3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:sheen 7s linear infinite;}
+@keyframes sheen{to{background-position:200%}}
+.lede{color:var(--mut);font-size:clamp(16px,1.8vw,20px);max-width:560px;}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+.stats{display:flex;flex-wrap:wrap;gap:30px;margin-top:48px;}
+.stat .v{font-family:var(--fm);font-size:clamp(24px,3.4vw,34px);font-weight:700;background:linear-gradient(90deg,#fff,var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.stat .l{color:var(--sub);font-size:12px;margin-top:2px;letter-spacing:.02em;}
+/* sections */
+section{position:relative;z-index:2;padding:84px 0;}
+.sec-tag{font-family:var(--fm);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);}
+h2{font-size:clamp(26px,3.6vw,40px);font-weight:700;letter-spacing:-.02em;margin:10px 0 12px;}
+.sec-sub{color:var(--mut);font-size:15px;max-width:600px;}
+/* live preview */
+.studio{margin-top:34px;background:linear-gradient(180deg,var(--bg2),#090b15);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.8);}
+.studio .barrow{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--line);}
+.studio .dot{width:11px;height:11px;border-radius:50%;}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.studio .barttl{margin-left:10px;font-family:var(--fm);font-size:12px;color:var(--sub);}
+.studio .body{display:grid;grid-template-columns:200px 1fr;gap:0;}
+@media(max-width:760px){.studio .body{grid-template-columns:1fr;}}
+.studio .panel{border-right:1px solid var(--line);padding:16px;}
+@media(max-width:760px){.studio .panel{border-right:none;border-bottom:1px solid var(--line);}}
+.plabel{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin:4px 0 8px;}
+.chip{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin:0 6px 6px 0;cursor:pointer;color:var(--mut);transition:.15s;}
+.chip.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+.swatches{display:flex;flex-wrap:wrap;gap:7px;}
+.sw{width:30px;height:30px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.15s;}
+.sw.on{border-color:#fff;transform:scale(1.08);}
+.stage{padding:22px;display:flex;flex-direction:column;align-items:center;gap:14px;background:radial-gradient(120% 120% at 50% 0%,rgba(124,123,255,.08),transparent 60%);}
+.previewport{transform:scale(.86);transform-origin:top center;}
+.instr{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:10px;padding:10px 38px 10px 12px;font-family:var(--fm);font-size:12px;color:var(--mut);position:relative;}
+.instr b{color:var(--acc2);}
+.instr .cp{position:absolute;top:7px;right:7px;font-size:10px;border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer;color:var(--mut);background:var(--surf);}
+/* features */
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:34px;}
+.fcard{display:block;background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.2s;}
+.fcard:hover{transform:translateY(-4px);border-color:var(--acc);background:var(--surf2);box-shadow:0 20px 50px -24px rgba(124,123,255,.5);}
+.fcard .ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-weight:700;margin-bottom:14px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#06121a;}
+.fcard h3{font-size:17px;font-weight:700;margin-bottom:6px;}
+.fcard p{color:var(--mut);font-size:13.5px;}
+.fcard .go{margin-top:12px;color:var(--acc2);font-size:13px;font-weight:600;}
+.fcard{will-change:transform;transform-style:preserve-3d;}
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1);}
+.js .reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none;}}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:30px;counter-reset:s;}
+.step{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--surf);}
+.step .n{font-family:var(--fm);color:var(--acc);font-size:13px;}
+.step h4{font-size:15.5px;margin:8px 0 6px;}
+.step p{color:var(--mut);font-size:13px;}
+footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:40px 0 70px;color:var(--sub);font-size:12.5px;}
+footer b{color:var(--mut);}
+/* mini landing (preview) */
+.mini{width:340px;height:300px;background:var(--m-bg,#fff);color:var(--m-ink,#16181d);font-family:var(--m-body,'IBM Plex Sans KR',sans-serif);border-radius:var(--m-r,14px);overflow:hidden;position:relative;--m-acc:#7c7bff;--m-mut:#8a8f9c;--m-card:#f5f6fa;--m-soft:rgba(124,123,255,.12);--m-rs:9px;--m-sh:none;box-shadow:0 20px 50px -20px rgba(0,0,0,.6);}
+.mini *{box-sizing:border-box;}
+.mtop{display:flex;align-items:center;gap:6px;padding:11px 15px;border-bottom:1px solid rgba(128,128,128,.16);font-size:11px;}
+.mtop .nav{margin-left:auto;display:flex;gap:9px;color:var(--m-mut);font-size:10px;}
+.mtop .mbtn{border:1px solid var(--m-acc);color:var(--m-acc);border-radius:var(--m-rs);padding:2px 8px;font-size:9px;}
+.mhero{padding:18px 15px 4px;}
+.meyebrow{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--m-acc);}
+.mini h3{font-family:var(--m-disp,var(--m-body));font-size:23px;line-height:1.08;font-weight:700;margin:7px 0;letter-spacing:-.02em;}
+.msub{font-size:11.5px;color:var(--m-mut);}
+.mbtns{display:flex;gap:7px;margin-top:12px;}
+.mbtns .b1{background:var(--m-acc);color:#fff;border-radius:var(--m-rs);padding:7px 13px;font-size:11px;font-weight:600;box-shadow:var(--m-sh);}
+.mbtns .b2{border:1px solid var(--m-acc);color:var(--m-acc);border-radius:var(--m-rs);padding:7px 13px;font-size:11px;}
+.mstats{display:flex;gap:8px;padding:16px 15px;}
+.mstat .v{font-family:var(--fm);font-size:17px;font-weight:700;}.mstat .l{font-size:9px;color:var(--m-mut);}
+.mbars{display:flex;align-items:flex-end;gap:6px;height:40px;padding:0 15px 16px;}
+.mbars i{flex:1;background:var(--m-acc);border-radius:4px 4px 0 0;}
+/* preview style presets */
+.p-aurora{--m-bg:#0c0e1a;--m-ink:#eef1f8;--m-acc:#7c7bff;--m-card:#141728;--m-mut:#8b93ad;--m-soft:rgba(124,123,255,.18);--m-sh:0 0 22px rgba(124,123,255,.4);--m-disp:'Black Han Sans';}
+.p-aurora .mhero{background:linear-gradient(120deg,rgba(124,123,255,.25),rgba(34,211,238,.18),rgba(255,93,162,.2));}
+.p-claude{--m-bg:#f5f4ed;--m-ink:#141413;--m-acc:#c96442;--m-card:#faf9f5;--m-mut:#5e5d59;--m-r:15px;--m-rs:10px;--m-sh:0 0 0 1px #e8e6dc;--m-disp:'Noto Serif KR',serif;}
+.p-stripe{--m-bg:#fff;--m-ink:#061b31;--m-acc:#533afd;--m-card:#fff;--m-mut:#64748d;--m-rs:4px;--m-sh:rgba(50,50,93,.18) 0 12px 26px -12px;}
+.p-stripe h3{font-weight:300;letter-spacing:-.03em;}
+.p-linear{--m-bg:#08090a;--m-ink:#f7f8f8;--m-acc:#5e6ad2;--m-card:rgba(255,255,255,.03);--m-mut:#8a8f98;--m-rs:6px;}
+.p-linear .mtop{border-color:rgba(255,255,255,.08);}
+.p-mono{--m-bg:#15171c;--m-ink:#e8eaed;--m-acc:#e5575c;--m-card:#1d2026;--m-mut:#9aa0a8;--m-soft:rgba(229,87,92,.15);}
+.p-terra{--m-bg:#f6ede4;--m-ink:#3a2a20;--m-acc:#c4602f;--m-card:#fffaf4;--m-mut:#977f6c;--m-r:16px;--m-rs:10px;}
+.p-candy{--m-bg:#fff0f6;--m-ink:#5b2348;--m-acc:#ff4d9d;--m-card:#fff;--m-mut:#b07a98;--m-r:20px;--m-rs:9999px;--m-sh:0 6px 18px rgba(255,77,157,.25);}
+.p-night{--m-bg:#0a0e14;--m-ink:#d6f5ff;--m-acc:#00e0c6;--m-card:#10161f;--m-mut:#6b8390;--m-soft:rgba(0,224,198,.16);--m-sh:0 0 16px rgba(0,224,198,.3);--m-disp:'JetBrains Mono',monospace;--m-body:'JetBrains Mono',monospace;}
+.p-apple{--m-bg:#fbfbfd;--m-ink:#1d1d1f;--m-acc:#0071e3;--m-card:#f5f5f7;--m-mut:#6e6e73;--m-rs:980px;--m-r:18px;--m-sh:0 14px 30px -16px rgba(0,0,0,.2);--m-disp:-apple-system,'SF Pro Display','Pretendard',sans-serif;}
+.p-apple h3{font-weight:700;letter-spacing:-.03em;}
+@media(prefers-reduced-motion:reduce){#fx{display:none}.hero{background:radial-gradient(100% 80% at 50% 0,rgba(124,123,255,.2),var(--bg))}h1 .g,.stat .v{animation:none}}
+</style>
+</head>
+<body>
+<div class="nav"><div class="wrap row">
+  <span class="brand"><span class="gem"></span>Vibe Design Studio</span>
+  <nav>
+    <a href="design-presets.html">프리셋</a><a href="design-effects.html">효과</a><a href="design-catalog.html">카탈로그</a><a href="design-systems.html">시스템</a><a href="design-references.html">레퍼런스</a>
+    <a href="https://github.com/ljhljh0703-cmd/VDS" target="_blank" rel="noopener" style="border:1px solid currentColor;border-radius:999px;padding:3px 11px;font-weight:700;text-decoration:none;white-space:nowrap">GitHub ↗</a>  </nav>
+</div></div>
+
+<header class="hero">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="wrap inner">
+    <div class="eyebrow">Vibe Design Studio</div>
+    <h1>감각을, <span class="g">시스템으로.</span></h1>
+    <p class="lede">흩어진 디자인 영감을 복붙용 DESIGN.md와 shadcn 토큰으로 정리했어요. 용도만 고르면 프로급 톤이 바로 입혀져요. AI 코딩 툴에 그대로 붙이면 끝이에요.</p>
+    <div class="cta">
+      <a class="btn pri" href="#try">스튜디오 해보기 →</a>
+      <a class="btn gho" href="design-presets.html">프리셋 보기</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">77</div><div class="l">디자인 기법</div></div>
+      <div class="stat"><div class="v">33</div><div class="l">스타일 프리셋</div></div>
+      <div class="stat"><div class="v">66</div><div class="l">라이브 효과</div></div>
+      <div class="stat"><div class="v">53</div><div class="l">참조 시스템</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="try"><div class="wrap">
+  <div class="sec-tag">Live preview</div>
+  <h2>고르면 바로 입혀져요</h2>
+  <p class="sec-sub">용도와 스타일을 고르면 같은 화면이 그 톤으로 바뀌어요. 마음에 들면 아래 "이렇게 지시" 문구를 복사해서 쓰세요.</p>
+  <div class="studio">
+    <div class="barrow"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="barttl">studio · live preview</span></div>
+    <div class="body">
+      <div class="panel">
+        <div class="plabel">용도</div>
+        <div id="cases"></div>
+        <div class="plabel" style="margin-top:14px">스타일</div>
+        <div class="swatches" id="sws"></div>
+      </div>
+      <div class="stage" role="img" aria-label="라이브 디자인 프리뷰 — 선택한 용도·스타일이 미니 랜딩에 즉시 적용됩니다">
+        <div class="previewport"><div class="mini p-aurora" id="mini"></div></div>
+        <div class="instr"><button class="cp" onclick="cpInstr(this)">복사</button><b>이렇게 지시</b> · <span id="instr">오로라 톤으로 포트폴리오 히어로 만들어줘</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-tag">Inside</div>
+  <h2>VDS를 이루는 네 가지</h2>
+  <p class="sec-sub">따로 써도 되고, 합치면 하나의 디자인 시스템이 돼요.</p>
+  <div class="feat">
+    <a class="fcard" href="design-references.html"><div class="ic">D</div><h3>시스템 디렉토리</h3><p>실사이트 38곳의 디자인 시스템. 카드마다 복붙용 DESIGN.md·shadcn 토큰.</p><div class="go">열기 →</div></a>
+    <a class="fcard" href="design-catalog.html"><div class="ic">C</div><h3>기법 카탈로그</h3><p>HTML·디자인 기법 77종. 검색·필터로 "이렇게 지시" 문구까지.</p><div class="go">열기 →</div></a>
+    <a class="fcard" href="design-presets.html"><div class="ic">P</div><h3>스타일 프리셋</h3><p>같은 화면을 33종 스타일로 라이브 비교. Claude·Stripe·Linear 실토큰 포함.</p><div class="go">열기 →</div></a>
+    <a class="fcard" href="design-effects.html"><div class="ic">F</div><h3>효과 갤러리</h3><p>우주·배경 등 라이브 효과 66종. 스니펫 복사.</p><div class="go">열기 →</div></a>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-tag">How it works</div>
+  <h2>세 단계면 끝</h2>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><h4>용도를 고른다</h4><p>포트폴리오·랜딩·덱… 목적만 고르세요.</p></div>
+    <div class="step"><div class="n">02</div><h4>스타일을 입힌다</h4><p>프리셋·효과를 고르면 내 화면에 바로 반영돼요.</p></div>
+    <div class="step"><div class="n">03</div><h4>지시·발행</h4><p>"이렇게 지시"를 복사해 AI에 전달하거나 그대로 발행해요.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <b>Vibe Design Studio</b> — 바이브 코더를 위한 디자인 시스템 스튜디오.<br>
+  수치는 전부 실제 보유분이에요(기법 77 · 프리셋 33 · 효과 66 · 참조 시스템 53). 과장 없어요.<br><span style="opacity:.65">© 2026 이주형</span>
+</div></footer>
+
+<script>
+/* ===== HERO showstopper: 흐르는 그라데이션 블롭 + 파티클 성좌 + 포인터 ===== */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var cv=document.getElementById('fx'); if(!cv||reduce)return;
+  var ctx=cv.getContext('2d'),dpr=Math.min(devicePixelRatio||1,2),W,H,t=0,raf=0,run=true;
+  var blobs=[{c:'124,123,255'},{c:'34,211,238'},{c:'255,93,162'},{c:'90,89,255'}];
+  var P=[]; var mx=.5,my=.4;
+  function size(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    P=[];for(var i=0;i<70;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25});}
+  function frame(){t+=.005;
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#070810';ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='lighter';
+    for(var i=0;i<blobs.length;i++){var b=blobs[i],
+      x=W*(.5+.34*Math.sin(t*(.7+i*.27)+i*1.7))+(mx-.5)*40*(i+1),
+      y=H*(.45+.32*Math.cos(t*(.6+i*.31)+i*2.1))+(my-.5)*40*(i+1),
+      r=Math.max(W,H)*(.34+.06*Math.sin(t+i));
+      var g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,'rgba('+b.c+',.42)');g.addColorStop(1,'rgba('+b.c+',0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();}
+    ctx.globalCompositeOperation='source-over';
+    for(var i=0;i<P.length;i++){var p=P[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
+    for(var i=0;i<P.length;i++)for(var j=i+1;j<P.length;j++){var a=P[i],b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;
+      if(d<10000){ctx.strokeStyle='rgba(180,190,255,'+(1-d/10000)*.16+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}
+    ctx.fillStyle='rgba(220,225,255,.7)';for(var i=0;i<P.length;i++){ctx.beginPath();ctx.arc(P[i].x,P[i].y,1.3,0,7);ctx.fill();}
+    if(run)raf=requestAnimationFrame(frame);}
+  addEventListener('pointermove',function(e){mx=e.clientX/innerWidth;my=e.clientY/innerHeight;});
+  document.addEventListener('visibilitychange',function(){run=!document.hidden;if(run)frame();});
+  size();addEventListener('resize',size);frame();
+})();
+
+/* ===== Live preview ===== */
+var SAMPLE=`<div class="mtop"><b>Brand</b><span class="nav"><span>Work</span><span>About</span></span><span class="mbtn">Contact</span></div>
+<div class="mhero"><div class="meyebrow">{EY}</div><h3>{H}</h3><div class="msub">{S}</div><div class="mbtns"><span class="b1">{B}</span><span class="b2">자세히</span></div></div>
+<div class="mstats"><div class="mstat"><div class="v">981</div><div class="l">노드</div></div><div class="mstat"><div class="v">1.2k</div><div class="l">연결</div></div><div class="mstat"><div class="v">154</div><div class="l">군집</div></div></div>
+<div class="mbars"><i style="height:42%"></i><i style="height:72%"></i><i style="height:56%"></i><i style="height:92%"></i><i style="height:64%"></i></div>`;
+var CASES=[
+ {id:"portfolio",nm:"포트폴리오",ey:"Portfolio",h:"감각을 시스템으로",s:"학습을 구조로 흡수하는 지식 운영체계.",b:"보러가기"},
+ {id:"landing",nm:"제품 랜딩",ey:"Product",h:"더 빠른 빌드",s:"코드 몰라도 프로급 UI를 즉시.",b:"무료 시작"},
+ {id:"invite",nm:"초대장",ey:"Invitation",h:"함께해요",s:"특별한 저녁으로 당신을 초대합니다.",b:"참석하기"},
+ {id:"deck",nm:"피치덱",ey:"Pitch",h:"다음 세대의 도구",s:"시장을 다시 정의하는 제품.",b:"데모 보기"},
+ {id:"applelaunch",nm:"제품 출시(애플형)",ey:"Launch",h:"비범한 성능.",s:"한 화면에 하나의 메시지. 여백이 말한다.",b:"구입하기"}
+];
+var STYLES=[
+ {id:"p-aurora",nm:"오로라",c:"linear-gradient(135deg,#7c7bff,#22d3ee,#ff5da2)"},
+ {id:"p-claude",nm:"Claude",c:"#c96442"},
+ {id:"p-stripe",nm:"Stripe",c:"#533afd"},
+ {id:"p-linear",nm:"Linear",c:"#5e6ad2"},
+ {id:"p-mono",nm:"모노",c:"#e5575c"},
+ {id:"p-terra",nm:"테라코타",c:"#c4602f"},
+ {id:"p-candy",nm:"캔디",c:"#ff4d9d"},
+ {id:"p-night",nm:"네온",c:"#00e0c6"},
+ {id:"p-apple",nm:"Apple",c:"#0071e3"}
+];
+var curCase=CASES[0],curStyle=STYLES[0];
+function renderMini(){
+  var c=curCase, m=document.getElementById('mini');
+  m.className='mini '+curStyle.id;
+  m.innerHTML=SAMPLE.replace('{EY}',c.ey).replace('{H}',c.h).replace('{S}',c.s).replace('{B}',c.b);
+  document.getElementById('instr').textContent=curStyle.nm+' 톤으로 '+c.nm+' 히어로 만들어줘';
+}
+function chips(){
+  document.getElementById('cases').innerHTML=CASES.map(function(c){return '<span class="chip '+(c.id===curCase.id?'on':'')+'" data-c="'+c.id+'">'+c.nm+'</span>';}).join('');
+  document.getElementById('sws').innerHTML=STYLES.map(function(s){return '<span class="sw '+(s.id===curStyle.id?'on':'')+'" data-s="'+s.id+'" title="'+s.nm+'" style="background:'+s.c+'"></span>';}).join('');
+}
+document.addEventListener('click',function(e){
+  var c=e.target.closest('[data-c]'); if(c){curCase=CASES.find(function(x){return x.id===c.dataset.c;});chips();renderMini();return;}
+  var s=e.target.closest('[data-s]'); if(s){curStyle=STYLES.find(function(x){return x.id===s.dataset.s;});chips();renderMini();}
+});
+function cpInstr(b){var t=document.getElementById('instr').textContent;navigator.clipboard&&navigator.clipboard.writeText(t);b.textContent='✓';setTimeout(function(){b.textContent='복사';},1200);}
+chips();renderMini();
+
+/* ===== premium: 스크롤 리빌 + 3D 틸트 (Behance 3D 쇼케이스 감성) ===== */
+(function(){
+  var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els=[].slice.call(document.querySelectorAll('h2,.sec-sub,.fcard,.step,.studio,.stat'));
+  els.forEach(function(e){e.classList.add('reveal');});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12});
+    els.forEach(function(e){io.observe(e);});
+  } else els.forEach(function(e){e.classList.add('in');});
+  if(!rm){[].slice.call(document.querySelectorAll('.fcard')).forEach(function(c){
+    c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      c.style.transform='perspective(720px) rotateY('+(x*9)+'deg) rotateX('+(-y*9)+'deg) translateY(-4px)';});
+    c.addEventListener('pointerleave',function(){c.style.transform='';});
+  });}
+})();
+</script>
+</body>
+</html>
