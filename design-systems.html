@@ -15,6 +15,7 @@
 body{background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased;padding:0 20px 80px;transition:background .3s,color .3s;}
 .wrap{max-width:1180px;margin:0 auto;}
 a{color:inherit;}
+a[aria-current="page"]{font-weight:700;text-decoration:underline;text-underline-offset:4px;}
 .bar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
 .brand{font-family:var(--fd);font-weight:700;}.brand .d{color:var(--acc);}
 .bar nav{display:flex;gap:14px;align-items:center;font-size:13px;}
@@ -68,7 +69,7 @@ footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--rule);color:v
 <body>
 <div class="wrap">
   <div class="bar"><span class="brand">디자인 시스템 라이브러리<span class="d">.</span></span>
-    <nav><a href="design-studio.html">스튜디오</a><a href="design-presets.html">프리셋</a><a href="design-effects.html">효과</a><a href="design-catalog.html">카탈로그</a><a href="design-references.html">레퍼런스</a>
+    <nav><a href="design-studio.html">UI</a><a href="design-catalog.html">카탈로그</a><a href="design-presets.html">프리셋</a><a href="design-effects.html">효과</a><a href="design-systems.html" aria-current="page">시스템</a><a href="design-references.html">레퍼런스</a>
       <button class="tgl" onclick="tg()" aria-label="라이트/다크 전환">◐</button></nav></div>
   <header class="h">
     <h1>53 사이트, 실토큰으로 한자리에</h1>

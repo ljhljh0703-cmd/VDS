@@ -40,6 +40,7 @@ button{cursor:pointer}
 .brand-mark{display:inline-grid;place-items:center;width:26px;height:26px;border:1px solid var(--ink);font-family:var(--mono);font-size:11px}
 .brand small{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.06em;color:var(--muted)}
 .nav-links{display:flex;align-items:center;gap:18px;font-size:13px;color:var(--muted)}
+.nav-links a[aria-current="page"]{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:4px}
 .nav-links a:hover,.nav-links a:focus-visible{color:var(--ink)}
 .nav-links .nav-cta{border:1px solid var(--ink);color:var(--ink);padding:7px 11px}
 .nav-links .nav-cta:hover{background:var(--ink);color:var(--paper)}
@@ -213,12 +214,13 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(-
       <span class="brand-mark">VDS</span><span>Vibe Design Studio</span><small>DESIGN TOOLKIT</small>
     </a>
     <div class="nav-links">
-      <a href="#lexicon">요소 찾기</a>
+      <a href="design-studio.html" aria-current="page">UI</a>
       <a href="design-catalog.html">카탈로그</a>
       <a href="design-presets.html">프리셋</a>
       <a href="design-effects.html">효과</a>
       <a href="design-systems.html">시스템</a>
-      <a class="nav-cta" href="#lexicon">요소 찾기</a>
+      <a href="design-references.html">레퍼런스</a>
+      <a class="nav-cta" href="#lexicon">UI 56종</a>
       <button class="theme-toggle" type="button" onclick="toggleVdsTheme()" aria-label="라이트 또는 다크 테마 전환">◐</button>
     </div>
   </div>

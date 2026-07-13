@@ -15,6 +15,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans K
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 header.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-weight:600}
 nav a{color:var(--mut);text-decoration:none;margin-left:16px;font-size:14px}
+nav a[aria-current="page"]{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:4px}
 nav a:hover{color:var(--acc)}
 .tgl{width:34px;height:34px;border:1px solid var(--bd);border-radius:50%;background:var(--card);cursor:pointer;color:var(--ink)}
 h1{font-family:'Noto Serif KR',serif;font-size:clamp(30px,5vw,52px);margin:28px 0 10px;letter-spacing:-.02em}
@@ -101,7 +102,7 @@ footer{color:var(--mut);font-size:12px;border-top:1px solid var(--bd);padding:20
 <header class="top">
   <span>Vibe Design Studio · 디렉토리</span>
   <nav>
-    <a href="design-studio.html">스튜디오</a><a href="design-systems.html">시스템</a><a href="design-presets.html">프리셋</a><a href="design-effects.html">효과</a><a href="design-catalog.html">카탈로그</a>
+    <a href="design-studio.html">UI</a><a href="design-catalog.html">카탈로그</a><a href="design-presets.html">프리셋</a><a href="design-effects.html">효과</a><a href="design-systems.html">시스템</a><a href="design-references.html" aria-current="page">레퍼런스</a>
     <a href="https://github.com/ljhljh0703-cmd/VDS" target="_blank" rel="noopener" style="border:1px solid currentColor;border-radius:999px;padding:3px 11px;font-weight:700;text-decoration:none;white-space:nowrap">GitHub ↗</a>
     <button class="tgl" onclick="tg()" aria-label="테마 전환">◐</button>
   </nav>
