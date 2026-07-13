@@ -3,295 +3,688 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>document.documentElement.classList.add('js');</script>
-<title>Vibe Design Studio</title>
-<meta name="description" content="감각을 시스템으로. 바이브 코더를 위한 디자인 시스템 스튜디오 — 기법 77 · 프리셋 33 · 효과 66 · 참조 시스템 53. 복붙 DESIGN.md·shadcn 토큰 제공.">
-<meta property="og:title" content="Vibe Design Studio">
-<meta property="og:description" content="감각을 시스템으로. 디자인 지식을 제품화한 스튜디오.">
+<meta name="description" content="기법·프리셋·효과·레퍼런스를 모아 화면을 빠르게 만드는 개인 디자인 시스템.">
+<meta property="og:title" content="Vibe Design Studio — Design Toolkit">
+<meta property="og:description" content="용도를 고르고, 스타일을 비교하고, 바로 만들기 위한 디자인 도구 모음.">
 <meta property="og:image" content="_publish/assets/og.png">
 <link rel="icon" href="_publish/assets/favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet">
+<title>Vibe Design Studio — Design Toolkit</title>
+<script>(function(){var k='vds-theme',r=document.documentElement,s=localStorage.getItem(k);if(s)r.setAttribute('data-theme',s);else if(matchMedia('(prefers-color-scheme:dark)').matches)r.setAttribute('data-theme','dark');window.toggleVdsTheme=function(){var d=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',d);localStorage.setItem(k,d);};})();</script>
 <style>
 :root{
-  --bg:#070810; --bg2:#0c0e1a; --surf:rgba(255,255,255,.04); --surf2:rgba(255,255,255,.06);
-  --ink:#f4f6fb; --mut:#9aa3b7; --sub:#646c82; --line:rgba(255,255,255,.09);
-  --acc:#7c7bff; --acc2:#22d3ee; --acc3:#ff5da2;
-  --fd:'Black Han Sans',sans-serif; --fs:'Noto Serif KR',serif;
-  --fb:'IBM Plex Sans KR',-apple-system,sans-serif; --fm:'JetBrains Mono',ui-monospace,monospace;
+  --paper:#faf7f1;--surface:#ffffff;--ink:#1a1814;--muted:#7a6e5e;--quiet:#a89d90;
+  --line:rgba(26,24,20,.14);--line-strong:#c9c0b4;--accent:#7a1f2d;--accent-ink:#ffffff;
+  --accent-bright:#ebaab6;--accent-pale:#f0e1e4;--dark:#14110d;--dark-soft:#1c1814;
+  --focus:#7a1f2d;--max:1180px;
+  --sans:'IBM Plex Sans KR',system-ui,sans-serif;--display:'Newsreader','Noto Serif KR',serif;
+  --mono:'DM Mono','SFMono-Regular',Consolas,monospace;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-.wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
-a{color:inherit;text-decoration:none;}
-/* nav */
-.nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(7,8,16,.6);border-bottom:1px solid var(--line);}
-.nav .row{display:flex;align-items:center;justify-content:space-between;height:62px;}
-.brand{font-weight:700;letter-spacing:-.01em;font-size:16px;display:flex;align-items:center;gap:9px;}
-.brand .gem{width:18px;height:18px;border-radius:5px;background:conic-gradient(from 0deg,var(--acc),var(--acc2),var(--acc3),var(--acc));box-shadow:0 0 14px var(--acc);}
-.nav nav{display:flex;gap:20px;align-items:center;font-size:13.5px;color:var(--mut);}
-.nav nav a:hover{color:var(--ink);}
-.btn{display:inline-flex;align-items:center;gap:7px;border-radius:10px;padding:10px 18px;font-size:13.5px;font-weight:600;transition:transform .18s,box-shadow .18s,background .18s;}
-.btn.pri{background:linear-gradient(90deg,var(--acc),#5a59ff);color:#fff;box-shadow:0 6px 24px rgba(124,123,255,.4);}
-.btn.pri:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(124,123,255,.55);}
-.btn.gho{border:1px solid var(--line);color:var(--ink);}
-.btn.gho:hover{border-color:var(--acc);transform:translateY(-2px);}
-/* HERO */
-.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;}
-#fx{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
-.hero::after{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(120% 80% at 50% 0%,transparent 40%,var(--bg) 92%);pointer-events:none;}
-.hero .inner{position:relative;z-index:2;width:100%;padding:60px 0;}
-.eyebrow{font-family:var(--fm);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--acc2);}
-h1{font-size:clamp(40px,7.4vw,92px);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin:18px 0 18px;}
-h1 .g{background:linear-gradient(96deg,#fff 10%,var(--acc) 45%,var(--acc2) 75%,var(--acc3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:sheen 7s linear infinite;}
-@keyframes sheen{to{background-position:200%}}
-.lede{color:var(--mut);font-size:clamp(16px,1.8vw,20px);max-width:560px;}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
-.stats{display:flex;flex-wrap:wrap;gap:30px;margin-top:48px;}
-.stat .v{font-family:var(--fm);font-size:clamp(24px,3.4vw,34px);font-weight:700;background:linear-gradient(90deg,#fff,var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;}
-.stat .l{color:var(--sub);font-size:12px;margin-top:2px;letter-spacing:.02em;}
-/* sections */
-section{position:relative;z-index:2;padding:84px 0;}
-.sec-tag{font-family:var(--fm);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);}
-h2{font-size:clamp(26px,3.6vw,40px);font-weight:700;letter-spacing:-.02em;margin:10px 0 12px;}
-.sec-sub{color:var(--mut);font-size:15px;max-width:600px;}
-/* live preview */
-.studio{margin-top:34px;background:linear-gradient(180deg,var(--bg2),#090b15);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.8);}
-.studio .barrow{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--line);}
-.studio .dot{width:11px;height:11px;border-radius:50%;}
-.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
-.studio .barttl{margin-left:10px;font-family:var(--fm);font-size:12px;color:var(--sub);}
-.studio .body{display:grid;grid-template-columns:200px 1fr;gap:0;}
-@media(max-width:760px){.studio .body{grid-template-columns:1fr;}}
-.studio .panel{border-right:1px solid var(--line);padding:16px;}
-@media(max-width:760px){.studio .panel{border-right:none;border-bottom:1px solid var(--line);}}
-.plabel{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin:4px 0 8px;}
-.chip{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin:0 6px 6px 0;cursor:pointer;color:var(--mut);transition:.15s;}
-.chip.on{background:var(--acc);color:#fff;border-color:var(--acc);}
-.swatches{display:flex;flex-wrap:wrap;gap:7px;}
-.sw{width:30px;height:30px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.15s;}
-.sw.on{border-color:#fff;transform:scale(1.08);}
-.stage{padding:22px;display:flex;flex-direction:column;align-items:center;gap:14px;background:radial-gradient(120% 120% at 50% 0%,rgba(124,123,255,.08),transparent 60%);}
-.previewport{transform:scale(.86);transform-origin:top center;}
-.instr{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:10px;padding:10px 38px 10px 12px;font-family:var(--fm);font-size:12px;color:var(--mut);position:relative;}
-.instr b{color:var(--acc2);}
-.instr .cp{position:absolute;top:7px;right:7px;font-size:10px;border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer;color:var(--mut);background:var(--surf);}
-/* features */
-.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:34px;}
-.fcard{display:block;background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.2s;}
-.fcard:hover{transform:translateY(-4px);border-color:var(--acc);background:var(--surf2);box-shadow:0 20px 50px -24px rgba(124,123,255,.5);}
-.fcard .ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-weight:700;margin-bottom:14px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#06121a;}
-.fcard h3{font-size:17px;font-weight:700;margin-bottom:6px;}
-.fcard p{color:var(--mut);font-size:13.5px;}
-.fcard .go{margin-top:12px;color:var(--acc2);font-size:13px;font-weight:600;}
-.fcard{will-change:transform;transform-style:preserve-3d;}
-.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1);}
-.js .reveal.in{opacity:1;transform:none;}
-@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none;}}
-/* steps */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:30px;counter-reset:s;}
-.step{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--surf);}
-.step .n{font-family:var(--fm);color:var(--acc);font-size:13px;}
-.step h4{font-size:15.5px;margin:8px 0 6px;}
-.step p{color:var(--mut);font-size:13px;}
-footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:40px 0 70px;color:var(--sub);font-size:12.5px;}
-footer b{color:var(--mut);}
-/* mini landing (preview) */
-.mini{width:340px;height:300px;background:var(--m-bg,#fff);color:var(--m-ink,#16181d);font-family:var(--m-body,'IBM Plex Sans KR',sans-serif);border-radius:var(--m-r,14px);overflow:hidden;position:relative;--m-acc:#7c7bff;--m-mut:#8a8f9c;--m-card:#f5f6fa;--m-soft:rgba(124,123,255,.12);--m-rs:9px;--m-sh:none;box-shadow:0 20px 50px -20px rgba(0,0,0,.6);}
-.mini *{box-sizing:border-box;}
-.mtop{display:flex;align-items:center;gap:6px;padding:11px 15px;border-bottom:1px solid rgba(128,128,128,.16);font-size:11px;}
-.mtop .nav{margin-left:auto;display:flex;gap:9px;color:var(--m-mut);font-size:10px;}
-.mtop .mbtn{border:1px solid var(--m-acc);color:var(--m-acc);border-radius:var(--m-rs);padding:2px 8px;font-size:9px;}
-.mhero{padding:18px 15px 4px;}
-.meyebrow{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--m-acc);}
-.mini h3{font-family:var(--m-disp,var(--m-body));font-size:23px;line-height:1.08;font-weight:700;margin:7px 0;letter-spacing:-.02em;}
-.msub{font-size:11.5px;color:var(--m-mut);}
-.mbtns{display:flex;gap:7px;margin-top:12px;}
-.mbtns .b1{background:var(--m-acc);color:#fff;border-radius:var(--m-rs);padding:7px 13px;font-size:11px;font-weight:600;box-shadow:var(--m-sh);}
-.mbtns .b2{border:1px solid var(--m-acc);color:var(--m-acc);border-radius:var(--m-rs);padding:7px 13px;font-size:11px;}
-.mstats{display:flex;gap:8px;padding:16px 15px;}
-.mstat .v{font-family:var(--fm);font-size:17px;font-weight:700;}.mstat .l{font-size:9px;color:var(--m-mut);}
-.mbars{display:flex;align-items:flex-end;gap:6px;height:40px;padding:0 15px 16px;}
-.mbars i{flex:1;background:var(--m-acc);border-radius:4px 4px 0 0;}
-/* preview style presets */
-.p-aurora{--m-bg:#0c0e1a;--m-ink:#eef1f8;--m-acc:#7c7bff;--m-card:#141728;--m-mut:#8b93ad;--m-soft:rgba(124,123,255,.18);--m-sh:0 0 22px rgba(124,123,255,.4);--m-disp:'Black Han Sans';}
-.p-aurora .mhero{background:linear-gradient(120deg,rgba(124,123,255,.25),rgba(34,211,238,.18),rgba(255,93,162,.2));}
-.p-claude{--m-bg:#f5f4ed;--m-ink:#141413;--m-acc:#c96442;--m-card:#faf9f5;--m-mut:#5e5d59;--m-r:15px;--m-rs:10px;--m-sh:0 0 0 1px #e8e6dc;--m-disp:'Noto Serif KR',serif;}
-.p-stripe{--m-bg:#fff;--m-ink:#061b31;--m-acc:#533afd;--m-card:#fff;--m-mut:#64748d;--m-rs:4px;--m-sh:rgba(50,50,93,.18) 0 12px 26px -12px;}
-.p-stripe h3{font-weight:300;letter-spacing:-.03em;}
-.p-linear{--m-bg:#08090a;--m-ink:#f7f8f8;--m-acc:#5e6ad2;--m-card:rgba(255,255,255,.03);--m-mut:#8a8f98;--m-rs:6px;}
-.p-linear .mtop{border-color:rgba(255,255,255,.08);}
-.p-mono{--m-bg:#15171c;--m-ink:#e8eaed;--m-acc:#e5575c;--m-card:#1d2026;--m-mut:#9aa0a8;--m-soft:rgba(229,87,92,.15);}
-.p-terra{--m-bg:#f6ede4;--m-ink:#3a2a20;--m-acc:#c4602f;--m-card:#fffaf4;--m-mut:#977f6c;--m-r:16px;--m-rs:10px;}
-.p-candy{--m-bg:#fff0f6;--m-ink:#5b2348;--m-acc:#ff4d9d;--m-card:#fff;--m-mut:#b07a98;--m-r:20px;--m-rs:9999px;--m-sh:0 6px 18px rgba(255,77,157,.25);}
-.p-night{--m-bg:#0a0e14;--m-ink:#d6f5ff;--m-acc:#00e0c6;--m-card:#10161f;--m-mut:#6b8390;--m-soft:rgba(0,224,198,.16);--m-sh:0 0 16px rgba(0,224,198,.3);--m-disp:'JetBrains Mono',monospace;--m-body:'JetBrains Mono',monospace;}
-.p-apple{--m-bg:#fbfbfd;--m-ink:#1d1d1f;--m-acc:#0071e3;--m-card:#f5f5f7;--m-mut:#6e6e73;--m-rs:980px;--m-r:18px;--m-sh:0 14px 30px -16px rgba(0,0,0,.2);--m-disp:-apple-system,'SF Pro Display','Pretendard',sans-serif;}
-.p-apple h3{font-weight:700;letter-spacing:-.03em;}
-@media(prefers-reduced-motion:reduce){#fx{display:none}.hero{background:radial-gradient(100% 80% at 50% 0,rgba(124,123,255,.2),var(--bg))}h1 .g,.stat .v{animation:none}}
+[data-theme="dark"]{
+  --paper:#14110d;--surface:#1c1814;--ink:#f0ebe2;--muted:#a99f8e;--quiet:#817767;
+  --line:rgba(240,235,226,.15);--line-strong:#594d42;--accent:#d4566a;--accent-ink:#ffffff;
+  --accent-bright:#f3a8b5;--accent-pale:#342025;--dark:#0e0c0a;--dark-soft:#1c1814;--focus:#d4566a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(calc(100% - 48px),var(--max));margin:0 auto}
+.skip{position:absolute;left:12px;top:-60px;background:var(--accent);color:var(--ink);padding:10px 14px;border-radius:8px;z-index:100;font-weight:700}
+.skip:focus{top:12px}
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav-row{height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.brand-mark{display:inline-grid;place-items:center;width:26px;height:26px;border:1px solid var(--ink);font-family:var(--mono);font-size:11px}
+.brand small{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.06em;color:var(--muted)}
+.nav-links{display:flex;align-items:center;gap:18px;font-size:13px;color:var(--muted)}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--ink)}
+.nav-links .nav-cta{border:1px solid var(--ink);color:var(--ink);padding:7px 11px}
+.nav-links .nav-cta:hover{background:var(--ink);color:var(--paper)}
+.eyebrow{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero{padding:88px 0 54px;border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(350px,.95fr);gap:60px;align-items:end}
+h1{max-width:700px;margin:16px 0 22px;font-family:var(--display);font-size:clamp(48px,7.2vw,94px);font-weight:600;letter-spacing:-.065em;line-height:.91}
+h1 em{display:inline-block;font-style:normal;line-height:1.08;background:var(--accent);color:#fffdf8;padding:.04em .10em .11em}
+.lede{max-width:600px;margin:0;color:#564c40;font-size:clamp(16px,1.6vw,19px);font-weight:500;letter-spacing:-.02em}
+.hero-note{margin-top:32px;display:flex;align-items:center;gap:10px;font-size:12px;color:#62584b}
+.dot{width:8px;height:8px;border-radius:99px;background:var(--accent);border:1px solid var(--ink);flex:none}
+.search-shell{background:var(--dark);color:#f0ebe2;padding:22px;box-shadow:10px 10px 0 var(--accent)}
+.search-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#a99f8e}
+.key{border:1px solid #695d52;padding:2px 6px;color:#f0ebe2;font-size:10px;letter-spacing:0}
+.search-field{display:flex;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid #594d42}
+.search-field svg{width:19px;height:19px;flex:none;stroke:var(--accent-bright)}
+.search-field input{width:100%;border:0;outline:0;background:transparent;color:#f0ebe2;font-size:16px;letter-spacing:-.02em}
+.search-field input::placeholder{color:#a99f8e}
+.search-examples{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.example{border:1px solid #594d42;background:transparent;color:#d4cbbf;padding:7px 8px;font-size:11px;text-align:left}
+.example:hover,.example:focus-visible{border-color:var(--accent-bright);color:#f0ebe2}
+.search-foot{margin:15px 0 0;color:#a99f8e;font-size:11px}
+.search-foot b{color:var(--accent-bright);font-weight:500}
+.section{padding:88px 0}
+.section-intro{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:28px}
+.section h2{max-width:700px;margin:9px 0 0;font-family:var(--display);font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.05em;line-height:1}
+.section-copy{max-width:360px;margin:0;color:var(--muted);font-size:14px}
+.gallery-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px;padding:13px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);font:500 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.gallery-toolbar strong{color:var(--ink);font-weight:500}
+.gallery-toolbar p{margin:0;max-width:440px;font:400 12px/1.45 var(--sans);letter-spacing:0;text-transform:none;text-align:right}
+.result-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.visual-card{min-width:0;overflow:hidden;border:1px solid #d9d4cc;border-radius:14px;background:#fffdf9;color:#1a1814;transition:transform .16s,box-shadow .16s}
+.visual-card:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--accent)}
+.visual-preview{position:relative;isolation:isolate;overflow:hidden;height:190px;padding:13px;background-color:#0d1016;background-image:radial-gradient(rgba(255,255,255,.1) 1px,transparent 1px);background-size:16px 16px;color:#1a1814}
+.visual-preview:not(.run) *{animation-play-state:paused!important}
+.visual-card-body{display:block;padding:15px 16px 0}
+.visual-card-meta{display:flex;justify-content:space-between;gap:10px;color:#746b60;font:500 10px var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.visual-card h3{margin:12px 0 3px;font-family:var(--display);font-size:27px;font-weight:600;letter-spacing:-.045em;line-height:1}
+.visual-card .visual-description{min-height:42px;margin:12px 0;color:#6f665b;font-size:13px;line-height:1.5}
+.visual-instruction{margin-top:13px;border-left:3px solid var(--accent);background:#f2e6e8;padding:11px 12px;color:#332c27;font-size:12px;line-height:1.45}
+.visual-instruction b{color:#7a1f2d;font-weight:700}
+.visual-token{display:flex;align-items:center;gap:8px;min-height:42px;margin-top:13px;border-radius:8px;background:#f2f0ed;padding:8px 10px;color:#4d463d;font:500 11px/1.35 var(--mono)}
+.visual-copy{margin-left:auto;flex:none;border:1px solid #d2ccc3;border-radius:7px;background:#fffdfa;padding:4px 7px;color:#5f554a;font:600 11px var(--sans);cursor:pointer}
+.visual-copy:hover,.visual-copy:focus-visible{border-color:#7a1f2d;background:#7a1f2d;color:#fff}
+.visual-card-sources{display:flex;flex-wrap:wrap;gap:8px;padding:13px 16px 16px}
+.visual-card-sources a{border-bottom:1px solid #cfc8bf;color:#746b60;font:500 10px var(--mono);letter-spacing:.02em;text-decoration:none}
+.visual-card-sources a:hover,.visual-card-sources a:focus-visible{color:#7a1f2d;border-color:#7a1f2d}
+.empty{grid-column:1/-1;padding:40px 0;color:var(--muted);border-bottom:1px solid var(--line)}
+
+/* VDS visual reference cards — small live scenes, not stock screenshots. */
+.preview-ui{position:relative;width:100%;height:154px;border:1px solid rgba(26,24,20,.18);background:#fff;box-shadow:3px 3px 0 rgba(26,24,20,.12);font-family:var(--sans);font-size:9px;overflow:hidden}
+.preview-ui::before,.preview-ui::after{content:"";position:absolute;display:block}
+.preview-header{height:21px;border-bottom:1px solid #d8d1c7;background:#f8f5ef}
+.preview-header::before{content:"VDS";position:absolute;left:8px;top:6px;font:600 7px var(--mono);letter-spacing:.08em}
+.preview-lines{position:absolute;left:10px;top:36px;width:52%;height:7px;background:#d5cec4;box-shadow:0 15px 0 #e5dfd7,0 30px 0 #e5dfd7,0 45px 0 #f0ebe4}
+.preview-button{position:absolute;display:grid;place-items:center;height:19px;border:1px solid #1a1814;background:#7a1f2d;color:#fff;padding:0 8px;font:600 7px var(--mono)}
+.preview-scrim::after{inset:21px 0 0;background:rgba(31,26,21,.52)}
+.preview-modal{position:absolute;z-index:1;left:50%;top:51%;width:61%;height:68px;transform:translate(-50%,-25%);background:#fff;padding:11px;box-shadow:4px 5px 0 rgba(0,0,0,.18)}
+.preview-modal b{display:block;font-size:10px}.preview-modal i{display:block;width:72%;height:5px;margin-top:8px;background:#e1dbd2}.preview-modal .preview-button{right:10px;bottom:9px}
+.preview-placeholder{display:grid;place-items:center;background:linear-gradient(135deg,#f2ede4,#e6ded3)}
+.preview-input{width:82%;height:34px;border:1px solid #877d70;background:#fff;padding:11px;color:#9d9488;font-size:9px;box-shadow:0 4px 0 #ddd5ca}
+.preview-input::after{content:"이름을 입력하세요";font-size:9px}.preview-placeholder:hover .preview-input::after{content:"이주형";color:#1a1814}.preview-placeholder:hover .preview-input{border-color:#7a1f2d}
+.preview-slider{background:#eae3d9}.preview-slider .preview-ui{background:#faf7f1}.preview-range{position:absolute;left:14%;right:14%;top:67px;height:5px;background:#c8c0b5}.preview-range::before{content:"";position:absolute;left:0;width:58%;height:100%;background:#7a1f2d}.preview-range::after{content:"";position:absolute;top:50%;left:58%;width:20px;height:20px;transform:translate(-50%,-50%);border:2px solid #1a1814;border-radius:50%;background:#fff;transition:left .25s}.visual-card:hover .preview-range::after{left:76%}.visual-card:hover .preview-range::before{width:76%}
+.preview-truncation{padding:41px 14px;background:#f1e9df}.ellipsis-line{overflow:hidden;width:100%;white-space:nowrap;color:#1a1814;font-size:12px;text-overflow:ellipsis}.ellipsis-line::after{content:" · 디자인 시스템의 이름을 붙이는 긴 제목입니다"}.preview-truncation:hover .ellipsis-line{white-space:normal;overflow:visible}.preview-truncation:hover{overflow:visible}
+.preview-tooltip{background:#e8ded2}.tooltip-icon{position:absolute;left:50%;top:57%;display:grid;place-items:center;width:29px;height:29px;transform:translate(-50%,-50%);border:1px solid #1a1814;border-radius:50%;background:#fff;font:600 14px var(--display)}.tooltip-bubble{position:absolute;left:50%;top:27px;z-index:1;min-width:100px;transform:translateX(-50%);padding:8px;background:#1a1814;color:#fff;font-size:8px;opacity:.95}.tooltip-bubble::after{content:"";position:absolute;left:50%;bottom:-5px;width:10px;height:10px;transform:translateX(-50%) rotate(45deg);background:#1a1814}.preview-tooltip:hover .tooltip-bubble{animation:tooltip-pop .22s ease both}@keyframes tooltip-pop{from{opacity:0;transform:translate(-50%,7px)}to{opacity:1;transform:translate(-50%,0)}}
+.preview-popover{background:#eee6db}.popover-trigger{position:absolute;left:17px;top:61px;border:1px solid #1a1814;background:#fff;padding:7px 9px;font-size:8px}.popover-card{position:absolute;right:14px;top:35px;width:112px;padding:11px;border:1px solid #1a1814;background:#fff;box-shadow:4px 4px 0 #c9bfb2;font-size:8px}.popover-card i{display:block;height:5px;margin-top:7px;background:#d8d0c5;box-shadow:0 10px 0 #e7e1d8}.visual-card:hover .popover-card{animation:popover-open .2s ease both}@keyframes popover-open{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.preview-sidebar{background:#e4dbcf}.sidebar-frame{display:grid;grid-template-columns:50px 1fr;height:100%;background:#fff}.sidebar-rail{padding:11px 7px;border-right:1px solid #ddd5c9;background:#f5f0e9}.sidebar-rail i{display:block;height:8px;margin:8px 0;background:#d4cbc0}.sidebar-rail i:first-child{background:#7a1f2d}.sidebar-main{padding:20px 12px}.sidebar-main::before{content:"Workspace";font:600 8px var(--mono)}.sidebar-main::after{content:"";display:block;width:75%;height:7px;margin-top:12px;background:#d6cec2;box-shadow:0 15px 0 #e8e2da,0 30px 0 #e8e2da}
+.preview-segmented{display:grid;place-items:center;background:#efe8df}.segment{display:flex;padding:3px;border:1px solid #bfb5a8;background:#fff}.segment span{padding:7px 10px;font:600 8px var(--mono);color:#7a6e5e}.segment span:nth-child(2){background:#7a1f2d;color:#fff}.visual-card:hover .segment span:nth-child(2){background:#fff;color:#7a6e5e}.visual-card:hover .segment span:nth-child(3){background:#7a1f2d;color:#fff}
+.preview-skeleton{background:#e8e0d5}.skeleton-card{padding:13px;background:#fff}.skeleton-block{height:55px;background:linear-gradient(90deg,#e8e2d9 20%,#f7f4ee 50%,#e8e2d9 80%);background-size:200% 100%;animation:shimmer 1.4s infinite}.skeleton-line{height:7px;margin-top:10px;background:linear-gradient(90deg,#e8e2d9 20%,#f7f4ee 50%,#e8e2d9 80%);background-size:200% 100%;animation:shimmer 1.4s infinite}.skeleton-line.short{width:62%}@keyframes shimmer{to{background-position:-200% 0}}
+.preview-toast{background:#ece4da}.toast-shell{height:100%;padding:14px;background:#fff}.toast-lines{width:64%;height:7px;background:#d8d0c4;box-shadow:0 15px 0 #e8e1d8}.toast-message{position:absolute;right:11px;bottom:11px;display:flex;align-items:center;gap:6px;padding:9px 10px;background:#1a1814;color:#fff;box-shadow:3px 3px 0 #7a1f2d;font-size:8px;animation:toast-in 2.7s ease-in-out infinite}.toast-message::before{content:"✓";color:#f1a7b5;font-size:12px}@keyframes toast-in{0%,100%{opacity:0;transform:translateY(12px)}18%,82%{opacity:1;transform:translateY(0)}}
+.preview-accordion{background:#eee6dc}.accordion-box{padding:13px;background:#fff}.accordion-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #ddd4c9;font:600 8px var(--mono)}.accordion-row:first-child{color:#7a1f2d}.accordion-detail{padding:8px 0 2px;color:#7a6e5e;font-size:8px}
+.preview-empty{display:grid;place-items:center;background:#eee7dd}.empty-state{text-align:center}.empty-icon{width:32px;height:24px;margin:0 auto 10px;border:1px solid #1a1814;border-radius:2px}.empty-icon::before{content:"";display:block;width:11px;height:5px;margin:-6px 0 0 4px;border:1px solid #1a1814;border-bottom:0;background:#eee7dd}.empty-state b{display:block;font-size:9px}.empty-state span{display:inline-block;margin-top:8px;padding:5px 8px;background:#7a1f2d;color:#fff;font:600 7px var(--mono)}
+.preview-pagination{display:grid;place-items:center;background:#eee5da}.pager{display:flex;gap:4px}.pager i{display:grid;place-items:center;width:21px;height:21px;border:1px solid #9d9386;background:#fff;font:600 8px var(--mono);font-style:normal}.pager i:first-child{border-color:#7a1f2d;background:#7a1f2d;color:#fff}
+.preview-progress{background:#e9e0d5}.progress-shell{padding:29px 15px;background:#fff}.progress-shell b{display:block;margin-bottom:11px;font:600 8px var(--mono)}.progress-track{height:8px;background:#ddd5cb}.progress-track::before{content:"";display:block;width:64%;height:100%;background:#7a1f2d;animation:progress-grow 2.4s ease-in-out infinite}@keyframes progress-grow{0%,100%{width:32%}55%{width:78%}}
+.preview-tabs{display:grid;place-items:center;background:#eee5da}.tabs-demo{width:78%;border:1px solid #bfb5a8;background:#fff}.tabs-demo span{display:inline-block;padding:8px 9px;font:600 8px var(--mono);color:#786f64}.tabs-demo span:first-child{border-bottom:2px solid #7a1f2d;color:#7a1f2d}.tabs-demo i{display:block;width:68%;height:6px;margin:13px 9px;background:#e3dcd2;box-shadow:0 13px 0 #eee9e2}
+.preview-generic{display:grid;place-items:center;background:#e9e1d6}.g-window{position:relative;width:86%;height:120px;overflow:hidden;border:1px solid #8e8376;background:#fff;box-shadow:4px 4px 0 #c7bdae}.g-title{height:22px;border-bottom:1px solid #ddd4c9;background:#f7f2eb}.g-title::before{content:"";position:absolute;left:8px;top:8px;width:6px;height:6px;border-radius:50%;background:#d4566a;box-shadow:10px 0 #e4b058,20px 0 #7da974}.g-lines{position:absolute;left:12px;top:40px;width:44%;height:6px;background:#d8d0c5;box-shadow:0 14px 0 #e9e3db,0 28px 0 #e9e3db}.g-menu{position:absolute;z-index:2;left:15px;top:25px;width:96px;padding:6px;border:1px solid #74695d;background:#fff;box-shadow:3px 3px 0 #c8bdae}.g-menu span{display:block;padding:4px 5px;font-size:8px}.g-menu span:nth-child(2){background:#7a1f2d;color:#fff}.g-tree{position:absolute;left:11px;top:34px;width:48%;font:600 8px/1.75 var(--mono);color:#51493f}.g-tree span{display:block}.g-tree span::before{content:"›";display:inline-block;width:12px;color:#7a1f2d}.g-tree span:nth-child(2),.g-tree span:nth-child(3){padding-left:13px}.g-badge{position:absolute;right:14px;bottom:16px;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#3478f6;color:#fff;font:600 11px var(--mono)}.g-badge::after{content:"3";position:absolute;right:-7px;top:-7px;display:grid;place-items:center;width:16px;height:16px;border:1px solid #fff;border-radius:50%;background:#d4566a;font-size:8px}.g-focus{position:absolute;left:18px;right:18px;top:53px;height:29px;border:2px solid #3478f6;border-radius:6px;background:#fff;box-shadow:0 0 0 3px rgba(52,120,246,.28)}.g-focus::after{content:"Search…";position:absolute;left:9px;top:5px;color:#8c8276;font-size:8px}.g-inspector{position:absolute;right:0;top:22px;bottom:0;width:40%;border-left:1px solid #ddd4c9;background:#f6f1e9;padding:10px}.g-inspector::before{content:"STYLE";font:600 7px var(--mono);color:#857b70}.g-inspector::after{content:"";display:block;width:70%;height:5px;margin-top:12px;background:#7a1f2d;box-shadow:0 13px 0 #d9d0c4,0 26px 0 #d9d0c4}.g-control-row{position:absolute;left:18px;right:18px;top:57px;display:flex;gap:6px;align-items:center}.g-control-row i{display:block;height:24px;border:1px solid #958a7c;background:#fff;font-style:normal}.g-control-row i:first-child{width:45px;background:#7a1f2d;border-color:#7a1f2d}.g-control-row i:nth-child(2){width:36px}.g-control-row i:last-child{width:25px}.g-control-row i:last-child::after{content:"⌃\A⌄";display:block;white-space:pre;line-height:9px;text-align:center;font-size:8px}.g-overlay{position:absolute;inset:22px 0 0;background:rgba(19,17,15,.5)}.g-dialog{position:absolute;z-index:2;left:50%;top:51px;width:116px;padding:12px;transform:translateX(-50%);background:#fff;box-shadow:4px 4px 0 rgba(20,17,13,.25);font:600 8px var(--mono)}.g-dialog::after{content:"Cancel     Save";display:block;margin-top:16px;color:#7a1f2d}.g-nav{position:absolute;left:11px;right:11px;top:38px;border-bottom:1px solid #cbc2b6;padding-bottom:7px;font:600 8px var(--mono);color:#776c60;word-spacing:6px}.g-nav::after{content:"";position:absolute;left:0;bottom:-1px;width:30px;height:2px;background:#7a1f2d}.g-layout{position:absolute;left:10px;right:10px;top:34px;bottom:10px;display:grid;grid-template-columns:30% 1fr;border:1px solid #d6cdc1}.g-layout::before{content:"Inbox\A Today\A Drafts";white-space:pre;z-index:1;padding:8px;border-right:1px solid #d6cdc1;background:#f5f0e8;font:600 7px/1.8 var(--mono);color:#756b60}.g-layout::after{content:"";margin:14px;background:#e2dad0;box-shadow:0 14px 0 #eee9e2,0 28px 0 #eee9e2}.g-scrollbar{position:absolute;right:8px;top:36px;bottom:9px;width:5px;background:#e7e0d6}.g-scrollbar::after{content:"";position:absolute;top:16px;width:100%;height:36px;border-radius:5px;background:#938779}.g-input{position:absolute;left:18px;right:18px;top:50px;height:36px;border:1px solid #958a7d;background:#fff;padding:8px;color:#8c8175;font-size:8px}.g-input::before{content:"Label";position:absolute;left:0;top:-15px;color:#5e554b;font:600 7px var(--mono)}.g-input::after{content:"design  ×    report  ×";color:#7a1f2d}.g-feedback{position:absolute;left:20px;right:20px;top:49px;text-align:center;font:600 9px var(--mono)}.g-feedback::before{content:"";display:block;width:76%;height:9px;margin:0 auto 10px;background:linear-gradient(90deg,#7a1f2d 58%,#ddd4c8 58%)}.g-pointer{position:absolute;left:50%;top:42px;width:0;height:0;transform:rotate(-18deg);border-top:36px solid #fff;border-right:18px solid transparent;filter:drop-shadow(2px 2px 0 #1a1814)}.g-drag-list{position:absolute;left:20px;right:20px;top:37px}.g-drag-list i{display:block;height:18px;margin:5px 0;border:1px dashed #918577;background:#fff}.visual-card:hover .g-drag-list i:nth-child(2){transform:translateX(12px);border-color:#7a1f2d}.g-divider{position:absolute;left:20px;right:20px;top:42px;height:1px;background:#7b7164;box-shadow:0 27px 0 #c7bdb1,0 54px 0 #7b7164}.g-badges{position:absolute;left:18px;right:18px;top:57px;display:flex;gap:6px}.g-badges i{padding:6px 8px;border-radius:20px;background:#f4dfe3;color:#7a1f2d;font:600 8px var(--mono)}.g-badges i:nth-child(2){background:#e9e3d6;color:#5a5148}.g-hover-card{position:absolute;left:50%;top:32px;width:120px;transform:translateX(-50%);padding:12px;border:1px solid #8c8175;background:#fff;box-shadow:4px 4px 0 #c9bfae;font:600 8px var(--mono)}.g-hover-card::before{content:"JA";display:grid;place-items:center;width:22px;height:22px;margin-bottom:6px;border-radius:50%;background:#7a1f2d;color:#fff}.g-marquee{position:absolute;left:0;right:0;top:61px;overflow:hidden;white-space:nowrap;border-top:1px solid #7a1f2d;border-bottom:1px solid #7a1f2d;padding:8px 0;font:600 9px var(--mono);color:#7a1f2d}.g-marquee span{display:inline-block;animation:marquee-slide 6s linear infinite}@keyframes marquee-slide{from{transform:translateX(0)}to{transform:translateX(-38%)}}
+.detail{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);border-bottom:1px solid var(--ink);background:var(--surface)}
+.detail-copy{padding:34px 34px 36px}
+.detail-top{display:flex;justify-content:space-between;gap:20px;align-items:start}
+.detail h3{margin:10px 0 7px;font-family:var(--display);font-size:clamp(30px,3.4vw,44px);font-weight:600;letter-spacing:-.055em;line-height:.98}
+.term-id{white-space:nowrap;margin-top:3px;font:500 10px var(--mono);letter-spacing:.07em;color:var(--muted)}
+.definition{max-width:600px;margin:21px 0 0;font-size:16px;letter-spacing:-.018em}
+.detail-notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:27px}
+.detail-notes div{border-top:1px solid var(--line-strong);padding-top:9px}
+.detail-notes dt{font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.detail-notes dd{margin:6px 0 0;font-size:13px}
+.implementation{padding:34px;border-left:1px solid var(--line);background:var(--accent-pale)}
+.implementation h4{margin:8px 0 17px;font-family:var(--display);font-size:25px;font-weight:600;letter-spacing:-.035em;line-height:1}
+.cue{padding:12px 0;border-top:1px solid var(--line-strong)}
+.cue:last-of-type{border-bottom:1px solid var(--line-strong)}
+.cue span{display:block;margin-bottom:4px;font:500 10px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.cue strong{font-size:13px;letter-spacing:-.01em}
+.cue p{margin:4px 0 0;font-size:12px;color:var(--muted)}
+.detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.action{display:inline-flex;align-items:center;justify-content:center;min-height:38px;border:1px solid var(--ink);background:transparent;padding:8px 11px;color:var(--ink);font-size:12px;font-weight:700}
+.action.primary{background:var(--accent);color:var(--accent-ink)}
+.action:hover,.action:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 70%,transparent);outline-offset:2px}
+.path{padding:6px 0 0;font-size:12px;color:var(--muted)}
+.path a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.source-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.source-label{align-self:center;font:500 10px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.source-link{border:1px solid var(--line-strong);padding:5px 7px;font-size:11px;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.source-link:hover,.source-link:focus-visible{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.flow-card{padding:25px 25px 28px;border-right:1px solid var(--line)}
+.flow-card:last-child{border-right:0}
+.flow-no{font:500 11px var(--mono);color:var(--muted)}
+.flow-card h3{margin:36px 0 7px;font-family:var(--display);font-size:30px;font-weight:600;letter-spacing:-.045em;line-height:1}
+.flow-card p{max-width:270px;margin:0;color:var(--muted);font-size:13px}
+.flow-card strong{display:block;margin-top:17px;font-size:12px}
+.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.module{position:relative;min-height:178px;border:1px solid var(--line-strong);padding:20px;background:var(--surface);transition:transform .16s,box-shadow .16s}
+.module:hover,.module:focus-visible{transform:translate(-3px,-3px);box-shadow:4px 4px 0 var(--accent);outline:0}
+.module .module-type{font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.module h3{margin:32px 0 5px;font-family:var(--display);font-size:28px;font-weight:600;letter-spacing:-.045em;line-height:1}
+.module p{margin:0;color:var(--muted);font-size:12px}
+.module .arrow{position:absolute;right:18px;bottom:14px;font-size:18px}
+.pilot{margin-top:54px;padding:20px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;color:var(--muted);font-size:12px}
+.pilot p{max-width:610px;margin:0}
+.pilot b{color:var(--ink)}
+footer{background:var(--dark);color:#f0ebe2;padding:38px 0 48px}
+.footer-row{display:flex;justify-content:space-between;gap:30px}
+.footer-title{font-family:var(--display);font-size:28px;letter-spacing:-.045em}
+.footer-copy{max-width:520px;margin:8px 0 0;color:#a99f8e;font-size:12px}
+.footer-links{display:flex;flex-wrap:wrap;align-content:start;gap:10px 16px;font-size:12px;color:#f0ebe2}
+.footer-links a:hover{text-decoration:underline;text-underline-offset:3px}
+.theme-toggle{border:1px solid var(--line-strong);background:transparent;color:var(--ink);padding:7px 9px;font-size:12px;white-space:nowrap}
+.theme-toggle:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+@media(max-width:880px){
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .search-shell{max-width:620px}
+  .result-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .detail{grid-template-columns:1fr}
+  .implementation{border-left:0;border-top:1px solid var(--line)}
+  .modules{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .wrap{width:min(calc(100% - 32px),var(--max))}
+  .nav-links a:not(.nav-cta){display:none}
+  .brand small{display:none}
+  .hero{padding:55px 0 42px}
+  .section{padding:60px 0}
+  .section-intro{display:block}
+  .section-copy{margin-top:14px}
+  .result-list{grid-template-columns:1fr}
+  .term,.term:nth-child(2n){border-right:0}
+  .detail-copy,.implementation{padding:25px 20px}
+  .detail-notes{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow-card{border-right:0;border-bottom:1px solid var(--line)}
+  .flow-card:last-child{border-bottom:0}
+  .flow-card h3{margin-top:22px}
+  .modules{grid-template-columns:1fr}
+  .pilot,.footer-row{display:block}
+  .pilot p+ p{margin-top:13px}
+  .footer-links{margin-top:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
-<div class="nav"><div class="wrap row">
-  <span class="brand"><span class="gem"></span>Vibe Design Studio</span>
-  <nav>
-    <a href="design-presets.html">프리셋</a><a href="design-effects.html">효과</a><a href="design-catalog.html">카탈로그</a><a href="design-systems.html">시스템</a><a href="design-references.html">레퍼런스</a>
-    <a href="https://github.com/ljhljh0703-cmd/VDS" target="_blank" rel="noopener" style="border:1px solid currentColor;border-radius:999px;padding:3px 11px;font-weight:700;text-decoration:none;white-space:nowrap">GitHub ↗</a>  </nav>
-</div></div>
-
-<header class="hero">
-  <canvas id="fx" aria-hidden="true"></canvas>
-  <div class="wrap inner">
-    <div class="eyebrow">Vibe Design Studio</div>
-    <h1>감각을, <span class="g">시스템으로.</span></h1>
-    <p class="lede">흩어진 디자인 영감을 복붙용 DESIGN.md와 shadcn 토큰으로 정리했어요. 용도만 고르면 프로급 톤이 바로 입혀져요. AI 코딩 툴에 그대로 붙이면 끝이에요.</p>
-    <div class="cta">
-      <a class="btn pri" href="#try">스튜디오 해보기 →</a>
-      <a class="btn gho" href="design-presets.html">프리셋 보기</a>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="v">77</div><div class="l">디자인 기법</div></div>
-      <div class="stat"><div class="v">33</div><div class="l">스타일 프리셋</div></div>
-      <div class="stat"><div class="v">66</div><div class="l">라이브 효과</div></div>
-      <div class="stat"><div class="v">53</div><div class="l">참조 시스템</div></div>
+<a class="skip" href="#lexicon">요소 검색으로 건너뛰기</a>
+<nav class="nav" aria-label="VDS 주요 메뉴">
+  <div class="wrap nav-row">
+    <a class="brand" href="design-studio.html" aria-label="Vibe Design Studio 홈">
+      <span class="brand-mark">VDS</span><span>Vibe Design Studio</span><small>DESIGN TOOLKIT</small>
+    </a>
+    <div class="nav-links">
+      <a href="#lexicon">요소 찾기</a>
+      <a href="design-catalog.html">카탈로그</a>
+      <a href="design-presets.html">프리셋</a>
+      <a href="design-effects.html">효과</a>
+      <a href="design-systems.html">시스템</a>
+      <a class="nav-cta" href="#lexicon">요소 찾기</a>
+      <button class="theme-toggle" type="button" onclick="toggleVdsTheme()" aria-label="라이트 또는 다크 테마 전환">◐</button>
     </div>
   </div>
-</header>
+</nav>
 
-<section id="try"><div class="wrap">
-  <div class="sec-tag">Live preview</div>
-  <h2>고르면 바로 입혀져요</h2>
-  <p class="sec-sub">용도와 스타일을 고르면 같은 화면이 그 톤으로 바뀌어요. 마음에 들면 아래 "이렇게 지시" 문구를 복사해서 쓰세요.</p>
-  <div class="studio">
-    <div class="barrow"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="barttl">studio · live preview</span></div>
-    <div class="body">
-      <div class="panel">
-        <div class="plabel">용도</div>
-        <div id="cases"></div>
-        <div class="plabel" style="margin-top:14px">스타일</div>
-        <div class="swatches" id="sws"></div>
+<main>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">VIBE DESIGN STUDIO / DESIGN TOOLKIT</div>
+        <h1>감각을<br><em>시스템으로</em>.</h1>
+        <p class="lede">VDS는 화면을 만들 때 필요한 기법, 스타일, 효과, 레퍼런스를 모은 개인 디자인 시스템입니다. 원하는 용도를 고르고, 화면의 톤을 비교하고, 바로 쓸 수 있는 지시문과 스니펫으로 작업을 시작하세요.</p>
+        <div class="hero-note"><span class="dot"></span><span>기법 87 · 프리셋 32 · 효과 41 · 참조 시스템 55</span></div>
       </div>
-      <div class="stage" role="img" aria-label="라이브 디자인 프리뷰 — 선택한 용도·스타일이 미니 랜딩에 즉시 적용됩니다">
-        <div class="previewport"><div class="mini p-aurora" id="mini"></div></div>
-        <div class="instr"><button class="cp" onclick="cpInstr(this)">복사</button><b>이렇게 지시</b> · <span id="instr">오로라 톤으로 포트폴리오 히어로 만들어줘</span></div>
+      <section class="search-shell" aria-labelledby="search-title">
+        <div class="search-top"><span id="search-title">UI 요소 찾기</span><span class="key">⌘ / Ctrl K</span></div>
+        <label class="search-field" for="hero-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+          <span class="sr-only">보이는 요소를 설명해 검색</span>
+          <input id="hero-search" autocomplete="off" placeholder="예: 팝업 뒤 어두운 반투명 막" type="search">
+        </label>
+        <div class="search-examples" aria-label="검색 예시">
+          <button class="example" data-example="입력하면 사라지는 회색 글자">입력하면 사라지는 회색 글자</button>
+          <button class="example" data-example="볼륨을 움직이는 동그란 손잡이">볼륨을 움직이는 동그란 손잡이</button>
+          <button class="example" data-example="글자가 말줄임표로 잘림">글자가 말줄임표로 잘림</button>
+        </div>
+        <p class="search-foot">모양이나 쓰임을 적으면, VDS에서 사용할 이름과 구현 단서를 찾습니다.</p>
+      </section>
+    </div>
+  </header>
+
+  <section class="section" id="lexicon" aria-labelledby="lexicon-title">
+    <div class="wrap">
+      <div class="section-intro">
+        <div>
+          <div class="eyebrow">01 / visual reference</div>
+          <h2 id="lexicon-title">필요한 UI를<br>한 번에 봅니다.</h2>
+        </div>
+        <p class="section-copy">카드마다 요소의 모습, 작동 방식, 이름, 관련 자료를 함께 둡니다. 검색은 좁힐 때만 쓰고, 처음에는 전체를 훑어보세요.</p>
+      </div>
+
+      <div class="gallery-toolbar" aria-live="polite"><span id="result-count">0 cards</span><p>각 카드에 모습·설명·구현 키워드·관련 자료를 함께 담았습니다.</p></div>
+      <div class="result-list" id="result-list" aria-label="UI 시각 레퍼런스 카드"></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="flow-title">
+    <div class="wrap">
+      <div class="section-intro">
+        <div>
+          <div class="eyebrow">02 / how VDS works</div>
+          <h2 id="flow-title">VDS는 이렇게 씁니다.</h2>
+        </div>
+        <p class="section-copy">기법을 찾고, 스타일을 비교하고, 바로 작업에 가져갑니다. 필요한 도구만 골라 한 화면을 완성하세요.</p>
+      </div>
+      <div class="flow">
+        <article class="flow-card"><div class="flow-no">01</div><h3>용도를 고릅니다</h3><p>포트폴리오, 랜딩 페이지, 피치덱처럼 만들 화면의 목적을 먼저 정합니다.</p><strong>목적부터</strong></article>
+        <article class="flow-card"><div class="flow-no">02</div><h3>스타일을 입힙니다</h3><p>프리셋과 레퍼런스에서 글꼴, 색, 밀도, 분위기를 비교해 화면의 톤을 잡습니다.</p><strong>비교해서</strong></article>
+        <article class="flow-card"><div class="flow-no">03</div><h3>바로 만듭니다</h3><p>카탈로그의 지시문과 효과 스니펫을 가져와 작업 중인 화면에 적용합니다.</p><strong>지시문까지</strong></article>
       </div>
     </div>
-  </div>
-</div></section>
+  </section>
 
-<section><div class="wrap">
-  <div class="sec-tag">Inside</div>
-  <h2>VDS를 이루는 네 가지</h2>
-  <p class="sec-sub">따로 써도 되고, 합치면 하나의 디자인 시스템이 돼요.</p>
-  <div class="feat">
-    <a class="fcard" href="design-references.html"><div class="ic">D</div><h3>시스템 디렉토리</h3><p>실사이트 38곳의 디자인 시스템. 카드마다 복붙용 DESIGN.md·shadcn 토큰.</p><div class="go">열기 →</div></a>
-    <a class="fcard" href="design-catalog.html"><div class="ic">C</div><h3>기법 카탈로그</h3><p>HTML·디자인 기법 77종. 검색·필터로 "이렇게 지시" 문구까지.</p><div class="go">열기 →</div></a>
-    <a class="fcard" href="design-presets.html"><div class="ic">P</div><h3>스타일 프리셋</h3><p>같은 화면을 33종 스타일로 라이브 비교. Claude·Stripe·Linear 실토큰 포함.</p><div class="go">열기 →</div></a>
-    <a class="fcard" href="design-effects.html"><div class="ic">F</div><h3>효과 갤러리</h3><p>우주·배경 등 라이브 효과 66종. 스니펫 복사.</p><div class="go">열기 →</div></a>
-  </div>
-</div></section>
+  <section class="section" aria-labelledby="modules-title">
+    <div class="wrap">
+      <div class="section-intro">
+        <div>
+          <div class="eyebrow">03 / VDS tools</div>
+          <h2 id="modules-title">필요한 도구를 고릅니다.</h2>
+        </div>
+        <p class="section-copy">VDS의 각 도구는 화면을 만드는 다른 순간을 돕습니다. 기법을 찾고, 톤을 비교하고, 효과를 더하고, 좋은 사례를 참고하세요.</p>
+      </div>
+      <div class="modules">
+        <a class="module" href="design-catalog.html"><span class="module-type">HTML &amp; design techniques</span><h3>카탈로그</h3><p>87개 HTML·디자인 기법을 보고, 바로 쓸 지시문을 찾습니다.</p><span class="arrow">↗</span></a>
+        <a class="module" href="design-presets.html"><span class="module-type">style presets</span><h3>프리셋</h3><p>같은 화면을 서로 다른 스타일로 비교하고 톤을 고릅니다.</p><span class="arrow">↗</span></a>
+        <a class="module" href="design-effects.html"><span class="module-type">live effects</span><h3>효과</h3><p>CSS·모션·데이터 효과를 라이브로 보고 스니펫을 가져갑니다.</p><span class="arrow">↗</span></a>
+        <a class="module" href="design-systems.html"><span class="module-type">design systems</span><h3>시스템</h3><p>제품별 화면 구성과 컴포넌트 스타일을 비교합니다.</p><span class="arrow">↗</span></a>
+        <a class="module" href="design-references.html"><span class="module-type">reference archive</span><h3>레퍼런스</h3><p>실제 서비스와 스튜디오의 화면 구성을 참고합니다.</p><span class="arrow">↗</span></a>
+      </div>
+      <div class="pilot">
+        <p><b>VDS 사용법</b> 원하는 결과를 먼저 정하고, 카탈로그와 프리셋에서 방향을 잡은 뒤, 필요할 때 효과와 레퍼런스로 화면을 다듬습니다.</p>
+        <p>각 도구의 “이렇게 지시” 문구와 스니펫은 작업 중인 프로젝트에 바로 가져갈 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+</main>
 
-<section><div class="wrap">
-  <div class="sec-tag">How it works</div>
-  <h2>세 단계면 끝</h2>
-  <div class="steps">
-    <div class="step"><div class="n">01</div><h4>용도를 고른다</h4><p>포트폴리오·랜딩·덱… 목적만 고르세요.</p></div>
-    <div class="step"><div class="n">02</div><h4>스타일을 입힌다</h4><p>프리셋·효과를 고르면 내 화면에 바로 반영돼요.</p></div>
-    <div class="step"><div class="n">03</div><h4>지시·발행</h4><p>"이렇게 지시"를 복사해 AI에 전달하거나 그대로 발행해요.</p></div>
+<footer>
+  <div class="wrap footer-row">
+    <div><div class="footer-title">Vibe Design Studio</div><p class="footer-copy">개인 디자인 지식을 제품으로 빌드한 시스템.</p></div>
+    <div class="footer-links"><a href="#lexicon">요소 찾기</a><a href="design-catalog.html">카탈로그</a><a href="design-presets.html">프리셋</a><a href="design-effects.html">효과</a><a href="design-systems.html">시스템</a><a href="design-references.html">레퍼런스</a></div>
   </div>
-</div></section>
-
-<footer><div class="wrap">
-  <b>Vibe Design Studio</b> — 바이브 코더를 위한 디자인 시스템 스튜디오.<br>
-  수치는 전부 실제 보유분이에요(기법 77 · 프리셋 33 · 효과 66 · 참조 시스템 53). 과장 없어요.<br><span style="opacity:.65">© 2026 이주형</span>
-</div></footer>
+</footer>
 
 <script>
-/* ===== HERO showstopper: 흐르는 그라데이션 블롭 + 파티클 성좌 + 포인터 ===== */
-(function(){
-  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var cv=document.getElementById('fx'); if(!cv||reduce)return;
-  var ctx=cv.getContext('2d'),dpr=Math.min(devicePixelRatio||1,2),W,H,t=0,raf=0,run=true;
-  var blobs=[{c:'124,123,255'},{c:'34,211,238'},{c:'255,93,162'},{c:'90,89,255'}];
-  var P=[]; var mx=.5,my=.4;
-  function size(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-    P=[];for(var i=0;i<70;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25});}
-  function frame(){t+=.005;
-    ctx.clearRect(0,0,W,H);ctx.fillStyle='#070810';ctx.fillRect(0,0,W,H);
-    ctx.globalCompositeOperation='lighter';
-    for(var i=0;i<blobs.length;i++){var b=blobs[i],
-      x=W*(.5+.34*Math.sin(t*(.7+i*.27)+i*1.7))+(mx-.5)*40*(i+1),
-      y=H*(.45+.32*Math.cos(t*(.6+i*.31)+i*2.1))+(my-.5)*40*(i+1),
-      r=Math.max(W,H)*(.34+.06*Math.sin(t+i));
-      var g=ctx.createRadialGradient(x,y,0,x,y,r);
-      g.addColorStop(0,'rgba('+b.c+',.42)');g.addColorStop(1,'rgba('+b.c+',0)');
-      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();}
-    ctx.globalCompositeOperation='source-over';
-    for(var i=0;i<P.length;i++){var p=P[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
-    for(var i=0;i<P.length;i++)for(var j=i+1;j<P.length;j++){var a=P[i],b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;
-      if(d<10000){ctx.strokeStyle='rgba(180,190,255,'+(1-d/10000)*.16+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}
-    ctx.fillStyle='rgba(220,225,255,.7)';for(var i=0;i<P.length;i++){ctx.beginPath();ctx.arc(P[i].x,P[i].y,1.3,0,7);ctx.fill();}
-    if(run)raf=requestAnimationFrame(frame);}
-  addEventListener('pointermove',function(e){mx=e.clientX/innerWidth;my=e.clientY/innerHeight;});
-  document.addEventListener('visibilitychange',function(){run=!document.hidden;if(run)frame();});
-  size();addEventListener('resize',size);frame();
-})();
+const sourceLibrary = {
+  'w3c-dialog': {label:'Modal dialog pattern', href:'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/'},
+  'w3c-patterns': {label:'UI pattern examples', href:'https://www.w3.org/WAI/ARIA/apg/patterns/'},
+  'mdn-placeholder': {label:'MDN · placeholder', href:'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/placeholder'},
+  'mdn-text-overflow': {label:'MDN · text-overflow', href:'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-overflow'},
+  'mdn-popover': {label:'MDN · Popover API', href:'https://developer.mozilla.org/en-US/docs/Web/API/Popover_API'},
+  'apple-sidebars': {label:'Apple HIG · Sidebars', href:'https://developer.apple.com/design/human-interface-guidelines/sidebars'},
+  'apple-segmented': {label:'Apple HIG · Segmented controls', href:'https://developer.apple.com/design/human-interface-guidelines/segmented-controls'},
+  'apple-page-controls': {label:'Apple HIG · Page controls', href:'https://developer.apple.com/design/human-interface-guidelines/page-controls'},
+  'namethatui': {label:'NameThat UI · reference', href:'https://namethatui.com/'},
+  'vds-catalog': {label:'VDS 카탈로그', href:'design-catalog.html'},
+  'vds-reference': {label:'VDS 레퍼런스', href:'design-references.html'}
+};
+const sourceByEntry = {
+  scrim:['w3c-dialog','vds-reference'],
+  'form-field':['mdn-placeholder','vds-catalog'],
+  slider:['w3c-patterns','vds-catalog'],
+  truncation:['mdn-text-overflow','vds-catalog'],
+  'popover-dropdown-tooltip':['w3c-patterns','vds-catalog'],
+  'macos-popover':['mdn-popover','vds-reference'],
+  'macos-sidebar':['apple-sidebars','vds-reference'],
+  'segmented-control':['apple-segmented','vds-reference'],
+  'skeleton-spinner':['vds-catalog','vds-reference'],
+  toast:['w3c-patterns','vds-catalog'],
+  accordion:['w3c-patterns','vds-catalog'],
+  'empty-state':['vds-reference','vds-catalog'],
+  tabs:['apple-page-controls','vds-reference'],
+  'progress-indicators':['w3c-patterns','vds-catalog']
+};
+const entries = [
+  {
+    id:'scrim', group:'web', groupLabel:'Web',
+    ko:'스크림', en:'Scrim · modal backdrop',
+    aliases:['모달 뒤 어두운 막','팝업 배경','반투명 배경막','overlay backdrop','dialog background'],
+    definition:'모달·다이얼로그가 열렸을 때, 뒤의 화면을 낮춰 현재 작업에 시선을 모으는 반투명 레이어입니다.',
+    use:'사용자가 모달 안의 결정이나 입력에 집중해야 할 때 씁니다.',
+    confusion:'모달 자체나 팝오버 카드가 아닙니다. 스크림은 그 뒤의 레이어입니다.',
+    prompt:'현재 웹 화면에서 모달 뒤에 스크림을 추가해. 배경 클릭으로 닫히는지 여부를 명시하고, 대비·포커스 트랩·ESC 동작을 기존 다이얼로그 규칙에 맞춰 확인해.',
+    cues:[['Web','dialog backdrop / fixed overlay','다이얼로그와 별도 레이어로 두고 z-index 순서를 확인합니다.'],['React','Dialog overlay','사용 중인 UI 라이브러리의 Overlay·Backdrop API를 먼저 확인합니다.'],['Native','sheet / modal dimming','플랫폼 기본 모달이 dimming을 제공하는지부터 확인합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'form-field', group:'web', groupLabel:'Web',
+    ko:'폼 필드', en:'Form Field',
+    aliases:['입력하면 사라지는 회색 글자','검색창 안내 문구','input hint','빈 입력칸 글자','label helper error'],
+    definition:'라벨, 입력칸, 플레이스홀더, 도움말, 오류 메시지로 이루어진 입력 단위입니다.',
+    use:'사용자가 값을 입력하거나 선택해야 하는 흐름에서 목적·형식·오류를 함께 설명할 때 씁니다.',
+    confusion:'플레이스홀더는 폼 필드의 한 부분일 뿐이며, 라벨을 대체하면 안 됩니다.',
+    prompt:'이 입력 영역을 label, 도움말, 오류 상태까지 갖춘 form field로 구성해. 형식 예시는 placeholder로만 보조하고, 접근성 이름은 label에 남겨.',
+    cues:[['Web','label + placeholder attribute','보이는 라벨과 placeholder를 함께 사용합니다.'],['React','label + input placeholder','제어·비제어 상태와 무관하게 label 연결을 확인합니다.'],['Native','prompt / placeholder','기본 컴포넌트의 별도 label 지원 여부를 확인합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'slider', group:'macos', groupLabel:'macOS',
+    ko:'슬라이더', en:'Slider',
+    aliases:['볼륨을 움직이는 동그란 손잡이','드래그 점','range knob','slider knob','조절 바 점'],
+    definition:'범위 안에서 현재 값을 가리키고, 드래그 또는 키보드로 값을 바꾸는 슬라이더의 조작점입니다.',
+    use:'연속적인 수치나 볼륨·밝기처럼 즉시 조절을 느낄 수 있는 값을 바꿀 때 씁니다.',
+    confusion:'트랙은 값이 움직이는 길이고, 손잡이는 실제로 잡아 움직이는 요소입니다.',
+    prompt:'이 범위 입력의 slider thumb가 충분히 잡히고 키보드로도 조절되게 해. 현재 값과 최소·최대값을 보조기술이 알 수 있게 하고, 드래그 중 값 피드백을 보여줘.',
+    cues:[['Web','input[type=range] thumb','기본 range를 우선 검토하고, 커스텀 시 키보드 동작을 보존합니다.'],['React','Slider thumb','라이브러리의 Thumb와 Value 표시 API를 확인합니다.'],['Native','Slider thumb','터치 목표 크기와 단계(step) 설정을 함께 확인합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'truncation', group:'web', groupLabel:'Web',
+    ko:'텍스트 말줄임', en:'Truncation (Ellipsis & Line Clamp)',
+    aliases:['글자가 말줄임표로 잘림','세 점으로 잘림','ellipsis','긴 제목 잘림','text overflow'],
+    definition:'공간이 부족할 때 텍스트 일부를 생략하고 말줄임표로 이어짐을 나타내는 처리입니다.',
+    use:'한 줄 제목이나 목록 메타처럼 높이를 일정하게 지켜야 할 때 씁니다.',
+    confusion:'단순히 잘려 보이는 overflow와 다릅니다. 말줄임은 생략 사실을 전달해야 합니다.',
+    prompt:'이 목록 제목은 한 줄 말줄임으로 처리하되, 전체 문자열은 hover·focus 또는 접근 가능한 이름으로 확인할 수 있게 해. 중요한 정보가 잘리면 레이아웃을 먼저 재검토해.',
+    cues:[['Web','text-overflow: ellipsis','white-space·overflow 조건과 전체 텍스트 노출 경로를 함께 둡니다.'],['React','line clamp / title attribute','여러 줄 제한인지 한 줄 제한인지 먼저 정합니다.'],['Native','line limit / truncation mode','각 플랫폼의 truncation 모드를 확인합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'popover-dropdown-tooltip', group:'web', groupLabel:'Web',
+    ko:'팝오버 · 드롭다운 · 툴팁', en:'Popover vs. Dropdown Menu vs. Tooltip',
+    aliases:['작은 설명 말풍선','아이콘 위 설명','hover 설명','도움말 풍선'],
+    definition:'트리거에 붙는 세 가지 레이어입니다. 팝오버는 보조 내용, 드롭다운은 선택 행동, 툴팁은 짧은 설명을 맡습니다.',
+    use:'클릭·hover·focus 중 어떤 입력과 어떤 깊이의 내용을 다루는지 먼저 정한 뒤 선택합니다.',
+    confusion:'사용자 결정을 요구하는 모달과는 다릅니다. 툴팁은 보조 설명이고, 드롭다운은 선택지를 제공합니다.',
+    prompt:'이 트리거 뒤의 레이어를 popover, dropdown menu, tooltip 중 목적에 맞는 패턴으로 정해. 열림·닫힘·ESC·포커스 동작을 해당 패턴 규칙에 맞춰 구현해.',
+    cues:[['Web','role=tooltip / describedby','지연 시간과 hover·focus 동작을 함께 설계합니다.'],['React','Tooltip provider','포털 위치·충돌 회피 기능을 기존 라이브러리에서 확인합니다.'],['Native','help / hover label','플랫폼의 접근성 힌트와 중복되지 않게 합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'macos-popover', group:'macos', groupLabel:'macOS',
+    ko:'팝오버', en:'Popover',
+    aliases:['버튼 옆에 뜨는 작은 카드','클릭하면 뜨는 메뉴 카드','떠 있는 상세 카드','anchor popup'],
+    definition:'특정 버튼이나 요소에 닻을 두고, 추가 선택지·세부 정보를 잠시 보여주는 떠 있는 컨테이너입니다.',
+    use:'페이지 이동 없이 작은 선택·설정·보조 정보를 보여줄 때 씁니다.',
+    confusion:'화면 전체의 결정을 요구하는 모달이나, 단순 설명만 하는 툴팁과 다릅니다.',
+    prompt:'이 트리거 버튼에 연결된 popover를 만들어. 열림 상태·바깥 클릭·ESC·포커스 이동을 정의하고, 작은 화면에서 잘리지 않게 위치를 조정해.',
+    cues:[['Web','anchored popover','트리거와 콘텐츠의 aria 관계 및 위치 충돌을 확인합니다.'],['React','Popover content','포털과 focus management를 사용하는지 확인합니다.'],['Native','popover / menu','작은 화면에서 sheet로 바뀌는지 검토합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'macos-sidebar', group:'macos', groupLabel:'macOS',
+    ko:'사이드바', en:'Sidebar (Source List)',
+    aliases:['화면 옆 메뉴','왼쪽 메뉴 영역','사이드 메뉴','navigation rail','옆 패널'],
+    definition:'주요 섹션·작업 공간·보조 도구를 세로로 정리하는 지속적인 탐색 영역입니다.',
+    use:'여러 작업 영역을 오가거나, 현재 위치를 유지한 채 맥락을 전환해야 할 때 씁니다.',
+    confusion:'일시적으로 열리는 모바일 drawer와 항상 보이는 데스크톱 sidebar는 역할과 동작이 다를 수 있습니다.',
+    prompt:'이 앱에 sidebar를 구성해. 현재 위치를 명확히 표시하고, 좁은 화면에서는 접근 가능한 drawer 또는 다른 탐색 방식으로 전환해. 콘텐츠 영역을 과도하게 압박하지 마.',
+    cues:[['Web','aside + navigation','현재 페이지 표시와 반응형 접힘 규칙을 함께 둡니다.'],['React','layout shell / nav rail','라우팅 상태와 선택 상태를 연결합니다.'],['Native','sidebar / split view','플랫폼의 기본 sidebar 동작을 먼저 확인합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'segmented-control', group:'macos', groupLabel:'macOS',
+    ko:'세그먼트 컨트롤', en:'Segmented control',
+    aliases:['나란히 붙은 선택 버튼','탭처럼 보이는 작은 버튼 묶음','보기 전환 버튼','segmented tabs'],
+    definition:'서로 배타적인 몇 개의 보기·정렬·모드를 한 줄에서 빠르게 바꾸는 붙어 있는 선택 컨트롤입니다.',
+    use:'선택지가 적고 같은 수준의 보기를 즉시 전환할 때 씁니다.',
+    confusion:'페이지·섹션을 이동하는 탭과, 여러 개를 동시에 고르는 토글 그룹은 다릅니다.',
+    prompt:'이 보기 전환은 세그먼트 컨트롤로 구성해. 선택 상태를 명확히 보이고, 키보드 이동과 현재 선택의 접근성 속성을 제공해. 옵션 수가 많으면 다른 패턴을 검토해.',
+    cues:[['Web','radio group or tabs','무엇을 전환하는지에 따라 radio와 tabs 역할을 구분합니다.'],['React','ToggleGroup / Tabs','단일 선택 여부와 URL 상태 반영을 결정합니다.'],['Native','segmented control / picker','플랫폼 기본 선택 컨트롤을 우선 확인합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'skeleton-spinner', group:'web', groupLabel:'Web',
+    ko:'스켈레톤 · 스피너', en:'Skeleton vs. Spinner',
+    aliases:['콘텐츠 자리만 회색으로 보임','로딩 중 빈 카드','뼈대 로딩','content placeholder loading'],
+    definition:'실제 콘텐츠가 도착하기 전, 예상되는 구조와 밀도를 보여주는 임시 자리표시자입니다.',
+    use:'콘텐츠 형태를 예측할 수 있고, 기다림이 짧지만 빈 화면보다 구조가 도움이 될 때 씁니다.',
+    confusion:'진행률을 알려주는 progress bar나, 단순 회전 spinner와 목적이 다릅니다.',
+    prompt:'이 데이터 로딩에는 실제 카드 구조와 비슷한 skeleton을 사용해. 로딩이 길어지면 상태 메시지와 재시도 경로를 추가하고, 애니메이션은 reduced motion 환경에서 줄여.',
+    cues:[['Web','aria-busy + skeleton','콘텐츠 영역의 busy 상태와 실제 완료 전환을 명확히 합니다.'],['React','Suspense fallback / skeleton','데이터 경계와 fallback이 일치하는지 확인합니다.'],['Native','placeholder / redacted view','플랫폼의 loading placeholder 지원을 확인합니다.']],
+    related:'design-effects.html'
+  },
+  {
+    id:'toast', group:'web', groupLabel:'Web',
+    ko:'토스트', en:'Toast notification',
+    aliases:['저장됐다는 작은 알림','화면 구석 알림','잠깐 뜨는 메시지','snackbar'],
+    definition:'현재 흐름을 막지 않고, 저장·복사·실패 같은 짧은 결과를 알려주는 일시적 알림입니다.',
+    use:'사용자 행동의 결과가 바로 보이지 않거나, 되돌리기 같은 다음 행동을 짧게 제안할 때 씁니다.',
+    confusion:'확인을 요구하는 alert·modal과 다릅니다. 중요한 실패를 토스트만으로 숨기면 안 됩니다.',
+    prompt:'이 작업 완료 후 비차단 토스트를 보여줘. 성공·실패 메시지를 구분하고, 되돌리기처럼 시간이 중요한 행동만 명확한 버튼을 넣어. 보조기술에도 상태가 전달되게 해.',
+    cues:[['Web','live region / status','자동으로 사라지는 시간과 포커스 방해 여부를 점검합니다.'],['React','Toast provider','중복 알림·큐·닫기 동작을 기존 시스템과 맞춥니다.'],['Native','transient notification','플랫폼 알림 패턴과 중요도 기준을 확인합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'accordion', group:'web', groupLabel:'Web',
+    ko:'아코디언', en:'Accordion · disclosure',
+    aliases:['접히는 Q&A','누르면 펼쳐지는 목록','접기 펼치기','disclosure'],
+    definition:'제목을 눌러 연결된 상세 내용을 펼치고 접는 세로형 정보 구조입니다.',
+    use:'설명은 필요하지만 처음부터 모두 펼치면 훑기 어려운 보조 정보에 씁니다.',
+    confusion:'독립 페이지를 전환하는 탭이나, 한 번만 열리는 메뉴와 다릅니다.',
+    prompt:'이 FAQ를 아코디언으로 구현해. 각 제목은 실제 button으로 만들고, 펼침 상태와 연결된 패널을 접근 가능하게 표시해. 중요한 내용은 기본으로 감추지 마.',
+    cues:[['Web','button + aria-expanded','제목·패널 id 관계와 키보드 동작을 확인합니다.'],['React','Accordion item','동시에 여러 항목을 열 수 있는지 정책을 정합니다.'],['Native','disclosure group','플랫폼 기본 disclosure 패턴을 먼저 확인합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'empty-state', group:'web', groupLabel:'Web',
+    ko:'빈 상태', en:'Empty state',
+    aliases:['목록이 비어 있는 화면','결과 없음 화면','아무것도 없음','zero state','empty list'],
+    definition:'아직 데이터가 없거나, 검색 조건에 맞는 결과가 없을 때 다음 행동을 설명하는 화면 상태입니다.',
+    use:'처음 시작하는 공간, 필터 결과가 0개인 목록, 삭제 뒤 비어 버린 영역에 씁니다.',
+    confusion:'데이터를 기다리는 loading state나 오류를 알리는 error state와 다릅니다.',
+    prompt:'이 빈 목록에 empty state를 추가해. 왜 비어 있는지 한 줄로 설명하고, 사용자가 할 수 있는 다음 행동 하나를 제안해. 검색 결과 없음과 첫 사용 상태는 다른 문구를 써.',
+    cues:[['Web','empty state panel','검색·필터 초기화와 생성 행동 중 맞는 다음 단계를 둡니다.'],['React','conditional empty component','loading·error·empty 조건을 명확히 분리합니다.'],['Native','empty content view','화면의 주 목적을 대신하지 않는 크기로 구성합니다.']],
+    related:'design-presets.html'
+  },
+  {
+    id:'tabs', group:'web', groupLabel:'Web',
+    ko:'탭', en:'Tabs',
+    aliases:['나란히 있는 섹션 이름','탭 전환','한 영역 안 보기 전환','tablist'],
+    definition:'한 줄의 라벨로 하나의 공유 콘텐츠 영역을 전환하는 탐색 패턴입니다.',
+    use:'같은 깊이의 내용 묶음을 페이지 이동 없이 비교하거나 전환할 때 씁니다.',
+    confusion:'보기 모드만 바꾸는 세그먼트 컨트롤이나 페이지 번호를 옮기는 페이지네이션과 다릅니다.',
+    prompt:'이 동급 콘텐츠 전환을 tabs로 구성해. 선택된 탭과 연결 패널을 명시하고, 키보드 이동·포커스·URL 반영 정책을 정해.',
+    cues:[['Web','role=tablist','tab·tabpanel 관계와 선택 상태를 명확히 제공합니다.'],['React','Tabs component','초기 선택·라우팅·비동기 패널 상태를 함께 정합니다.'],['Native','tab view','플랫폼 탭 전환 규칙과 충돌하지 않게 합니다.']],
+    related:'design-catalog.html'
+  },
+  {
+    id:'progress-indicators', group:'web', groupLabel:'Web',
+    ko:'진행 링 · 스피너 · 진행 바', en:'Progress Ring vs. Spinner vs. Progress Bar',
+    aliases:['진행률 바','몇 단계 중인지','로딩 퍼센트','step progress','progress bar'],
+    definition:'완료까지 얼마나 남았는지, 또는 여러 단계 중 어디에 있는지 알려주는 시각적 상태 표시입니다.',
+    use:'기다림이 길거나, 여러 단계를 끝내야 하는 흐름에서 사용자의 예측 가능성을 높일 때 씁니다.',
+    confusion:'무기한 처리 중임만 보여주는 spinner와, 콘텐츠 구조를 보여주는 skeleton은 다릅니다.',
+    prompt:'이 긴 작업에는 실제 측정 가능한 progress indicator를 사용해. 퍼센트를 알 수 없으면 가짜 수치를 만들지 말고, 현재 처리 단계와 취소·백그라운드 전환 가능 여부를 알려줘.',
+    cues:[['Web','progress element / aria-valuenow','결정적 진행률인지 불확정 상태인지 구분합니다.'],['React','Progress component','실제 작업 이벤트와 표시 값을 연결합니다.'],['Native','progress view','플랫폼 기본의 determinate·indeterminate 모드를 확인합니다.']],
+    related:'design-catalog.html'
+  }
+];
 
-/* ===== Live preview ===== */
-var SAMPLE=`<div class="mtop"><b>Brand</b><span class="nav"><span>Work</span><span>About</span></span><span class="mbtn">Contact</span></div>
-<div class="mhero"><div class="meyebrow">{EY}</div><h3>{H}</h3><div class="msub">{S}</div><div class="mbtns"><span class="b1">{B}</span><span class="b2">자세히</span></div></div>
-<div class="mstats"><div class="mstat"><div class="v">981</div><div class="l">노드</div></div><div class="mstat"><div class="v">1.2k</div><div class="l">연결</div></div><div class="mstat"><div class="v">154</div><div class="l">군집</div></div></div>
-<div class="mbars"><i style="height:42%"></i><i style="height:72%"></i><i style="height:56%"></i><i style="height:92%"></i><i style="height:64%"></i></div>`;
-var CASES=[
- {id:"portfolio",nm:"포트폴리오",ey:"Portfolio",h:"감각을 시스템으로",s:"학습을 구조로 흡수하는 지식 운영체계.",b:"보러가기"},
- {id:"landing",nm:"제품 랜딩",ey:"Product",h:"더 빠른 빌드",s:"코드 몰라도 프로급 UI를 즉시.",b:"무료 시작"},
- {id:"invite",nm:"초대장",ey:"Invitation",h:"함께해요",s:"특별한 저녁으로 당신을 초대합니다.",b:"참석하기"},
- {id:"deck",nm:"피치덱",ey:"Pitch",h:"다음 세대의 도구",s:"시장을 다시 정의하는 제품.",b:"데모 보기"},
- {id:"applelaunch",nm:"제품 출시(애플형)",ey:"Launch",h:"비범한 성능.",s:"한 화면에 하나의 메시지. 여백이 말한다.",b:"구입하기"}
-];
-var STYLES=[
- {id:"p-aurora",nm:"오로라",c:"linear-gradient(135deg,#7c7bff,#22d3ee,#ff5da2)"},
- {id:"p-claude",nm:"Claude",c:"#c96442"},
- {id:"p-stripe",nm:"Stripe",c:"#533afd"},
- {id:"p-linear",nm:"Linear",c:"#5e6ad2"},
- {id:"p-mono",nm:"모노",c:"#e5575c"},
- {id:"p-terra",nm:"테라코타",c:"#c4602f"},
- {id:"p-candy",nm:"캔디",c:"#ff4d9d"},
- {id:"p-night",nm:"네온",c:"#00e0c6"},
- {id:"p-apple",nm:"Apple",c:"#0071e3"}
-];
-var curCase=CASES[0],curStyle=STYLES[0];
-function renderMini(){
-  var c=curCase, m=document.getElementById('mini');
-  m.className='mini '+curStyle.id;
-  m.innerHTML=SAMPLE.replace('{EY}',c.ey).replace('{H}',c.h).replace('{S}',c.s).replace('{B}',c.b);
-  document.getElementById('instr').textContent=curStyle.nm+' 톤으로 '+c.nm+' 히어로 만들어줘';
+function catalogEntry(id, groupLabel, ko, en, api, definition, use, aliases, preview){
+  return {
+    id, group:groupLabel.toLowerCase(), groupLabel, ko, en,
+    aliases:aliases.split('|'),
+    definition, use,
+    confusion:'이름이 비슷한 요소도 입력 방식·선택 범위·콘텐츠 깊이에 따라 역할이 달라집니다.',
+    prompt:`이 화면의 ${ko}를 구현해. ${use} 현재 상태와 키보드 접근, 작은 화면에서의 동작을 기존 UI 규칙과 맞춰 확인해.`,
+    cues:[[groupLabel, api, '원래 플랫폼·웹 명칭을 기준으로 역할과 상태를 먼저 확인합니다.'],['VDS','관련 화면 규칙','카탈로그·효과와 함께 화면의 밀도와 피드백을 조정합니다.']],
+    related:'design-references.html', preview
+  };
 }
-function chips(){
-  document.getElementById('cases').innerHTML=CASES.map(function(c){return '<span class="chip '+(c.id===curCase.id?'on':'')+'" data-c="'+c.id+'">'+c.nm+'</span>';}).join('');
-  document.getElementById('sws').innerHTML=STYLES.map(function(s){return '<span class="sw '+(s.id===curStyle.id?'on':'')+'" data-s="'+s.id+'" title="'+s.nm+'" style="background:'+s.c+'"></span>';}).join('');
+
+const referenceAdditions = [
+  catalogEntry('menu-bar','macOS','메뉴 바','Menu Bar','NSApp.mainMenu','Mac 화면 최상단에서 앱 명령을 전역으로 제공하는 메뉴 스트립입니다.','앱 전체 명령을 창과 분리해 일관되게 제공할 때 씁니다.','상단 앱 메뉴|Finder 메뉴|application menu','menu'),
+  catalogEntry('context-menu','macOS','컨텍스트 메뉴','Context Menu','NSMenu','포인터 위치의 항목에 바로 적용할 수 있는 행동을 모은 메뉴입니다.','항목별 보조 행동을 빠르게 제공할 때 씁니다.','우클릭 메뉴|control 클릭 메뉴|right click menu','menu'),
+  catalogEntry('disclosure-triangle','macOS','디스클로저 트라이앵글','Disclosure Triangle','NSOutlineView','중첩된 내용을 펼치거나 접는 작은 회전 컨트롤입니다.','트리 안에서 하위 항목을 필요할 때만 드러낼 때 씁니다.','트리 화살표|펼치기 화살표|outline disclosure','tree'),
+  catalogEntry('dock-badge','macOS','독 배지','Dock Badge','NSDockTile.badgeLabel','Dock 아이콘 위에 개수나 상태를 겹쳐 보여주는 빨간 표식입니다.','앱을 열지 않아도 읽어야 하는 수량·상태를 알릴 때 씁니다.','앱 아이콘 숫자|notification badge|dock count','status'),
+  catalogEntry('focus-ring','macOS','포커스 링','Focus Ring','NSView.focusRingType','키보드 입력을 받는 컨트롤을 둘러싼 강조 윤곽입니다.','키보드 탐색 중 현재 조작 대상을 식별시킬 때 씁니다.','파란 테두리|키보드 포커스|active outline','focus'),
+  catalogEntry('inspector','macOS','인스펙터','Inspector','View.inspector(isPresented:content:)','현재 선택 항목의 속성을 보고 바꾸는 오른쪽 세부 패널입니다.','캔버스·문서의 선택 맥락을 유지한 채 세부 값을 편집할 때 씁니다.','오른쪽 속성 패널|properties panel|style inspector','panel'),
+  catalogEntry('menu-bar-extra','macOS','메뉴 바 엑스트라','Menu Bar Extra (Status Item)','NSStatusItem','macOS 메뉴 바 오른쪽에 머물며 짧은 상태와 빠른 행동을 제공하는 아이콘입니다.','항상 보이는 앱 상태·유틸리티 동작을 제공할 때 씁니다.','상태 아이콘|status item|menu bar item','status'),
+  catalogEntry('panel','macOS','플로팅 패널','Panel (Floating Window / HUD)','NSPanel','연관된 문서 창 위에서 보조 도구를 제공하는 떠 있는 Mac 창입니다.','현재 작업을 가리지 않고 보조 설정·도구를 유지할 때 씁니다.','HUD|floating window|utility panel','panel'),
+  catalogEntry('popup-pulldown-combo','macOS','팝업 · 풀다운 · 콤보 박스','Pop-Up Button vs. Pull-Down Button vs. Combo Box','NSPopUpButton','값 선택, 메뉴 실행, 직접 입력을 구분하는 비슷하지만 다른 macOS 컨트롤 묶음입니다.','선택값 표시와 행동 실행, 직접 입력 중 무엇이 필요한지 먼저 정할 때 씁니다.','드롭다운 선택|pull down|combo box','controls'),
+  catalogEntry('sheet','macOS','시트','Sheet','NSWindow.beginSheet(_:completionHandler:)','특정 Mac 창에 붙어 그 창 안의 결정을 요구하는 모달 패널입니다.','현재 문서에만 영향을 주는 확인·저장·공유 흐름에 씁니다.','창에 붙는 모달|window sheet|document modal','overlay'),
+  catalogEntry('stepper','macOS','스테퍼','Stepper','NSStepper','값을 한 단계씩 올리거나 내리는 작은 위·아래 화살표 컨트롤입니다.','복사 수·수량처럼 정밀한 증감이 필요한 수치에 씁니다.','증감 버튼|up down control|number stepper','controls'),
+  catalogEntry('toolbar','macOS','툴바','Toolbar (Unified Title Bar)','NSToolbar','창 제목 바에 통합되어 주요 작업을 제공하는 macOS 액션 행입니다.','문서·뷰에 자주 쓰는 상위 행동을 창 수준에서 제공할 때 씁니다.','상단 액션 바|unified title bar|window toolbar','navigation'),
+  catalogEntry('traffic-lights','macOS','트래픽 라이트','Traffic Lights (Window Controls)','NSWindow.standardWindowButton(_:)','창 왼쪽 위의 닫기·최소화·전체 화면 제어 3개입니다.','표준 Mac 창 프레임을 구성하거나 창 동작을 설명할 때 씁니다.','빨강 노랑 초록 버튼|window controls|close minimize zoom','status'),
+  catalogEntry('vibrancy','macOS','비브런시','Visual Effect Material (Vibrancy)','NSVisualEffectView','배경을 흐리게 비추며 내용 대비를 조정하는 적응형 반투명 소재입니다.','사이드바·메뉴·패널에 macOS 소재감을 더할 때 씁니다.','유리 질감|frosted material|blurred sidebar','panel'),
+  catalogEntry('window','macOS','Mac 윈도우','Mac Window','NSWindow','제목 바·툴바·콘텐츠·리사이즈 경계를 포함한 이동 가능한 앱 프레임입니다.','데스크톱 앱의 기본 작업 단위를 설명하거나 구성할 때 씁니다.','앱 창|title bar|resizable window','window'),
+  catalogEntry('split-view','macOS','스플릿 뷰','Split View','NSSplitView','드래그 가능한 구분선으로 나뉜 여러 개의 리사이즈 패널입니다.','탐색·목록·상세를 동시에 유지해야 할 때 씁니다.','분할 패널|draggable divider|resizable panes','layout'),
+  catalogEntry('scroll-view','macOS','스크롤 뷰','Scroll View (Scroller)','NSScrollView','콘텐츠 일부를 보이는 창 안에서 스크롤로 이동시키는 뷰입니다.','긴 문서·목록을 제한된 영역 안에서 탐색할 때 씁니다.','스크롤바|scroller|overflow viewport','scroll'),
+  catalogEntry('search-field','macOS','검색 필드','Search Field','NSSearchField','검색·지우기·최근 검색을 내장할 수 있는 Mac 전용 텍스트 입력입니다.','목록을 빠르게 필터링하거나 최근 검색을 다시 쓸 때 씁니다.','검색창|recent searches|clear search','input'),
+  catalogEntry('save-panel','macOS','저장 패널','Save Panel','NSSavePanel','파일 이름과 저장 위치를 정하는 표준 macOS 다이얼로그입니다.','사용자가 문서를 새 이름·위치로 저장해야 할 때 씁니다.','다른 이름으로 저장|save as|file location dialog','overlay'),
+  catalogEntry('token-field','macOS','토큰 필드','Token Field','NSTokenField','입력한 값을 제거 가능한 둥근 토큰으로 전환하는 텍스트 필드입니다.','태그·수신자처럼 여러 값을 축적해 입력할 때 씁니다.','태그 입력|removable chips|recipient field','input'),
+  catalogEntry('combo-button','macOS','콤보 버튼','Combo Button','NSComboButton','주요 행동 버튼과 관련 행동을 여는 화살표를 붙인 컨트롤입니다.','기본 행동을 빠르게 실행하면서 보조 선택지도 제공할 때 씁니다.','split button|save options|primary action menu','controls'),
+  catalogEntry('level-indicator','macOS','레벨 인디케이터','Level Indicator','NSLevelIndicator','용량·평점·관련도를 막대·별·게이지로 보여주는 상태 표시입니다.','연속 수치를 조작 없이 읽히는 상태로 전달할 때 씁니다.','별점|용량 게이지|relevance meter','feedback'),
+  catalogEntry('column-view','macOS','컬럼 뷰','Column View (Browser)','NSBrowser','Finder처럼 계층의 각 깊이를 옆 열로 이어서 보여주는 탐색 뷰입니다.','폴더·문서 구조를 깊이별로 빠르게 이동할 때 씁니다.','Finder 열 보기|hierarchy columns|browser view','tree'),
+  catalogEntry('outline-view','macOS','아웃라인 뷰','Outline View','NSOutlineView','들여쓰기된 행을 펼쳐 계층을 드러내는 트리형 목록입니다.','중첩된 프로젝트·파일·설정 구조를 한 목록에서 탐색할 때 씁니다.','트리 목록|indented rows|expandable outline','tree'),
+  catalogEntry('pointer','macOS','포인터','Pointer (Cursor)','NSCursor','마우스 위치와 가능한 조작을 알려주기 위해 바뀌는 커서 모양입니다.','드래그·텍스트 선택·리사이즈 같은 상호작용 가능성을 알려줄 때 씁니다.','커서|mouse pointer|resize cursor','pointer'),
+  catalogEntry('alert','macOS','알림창','Alert','NSAlert','아이콘·핵심 문장·취소와 확인 버튼을 갖춘 작은 중심 창입니다.','되돌리기 어렵거나 즉시 확인이 필요한 행동을 멈춰 세울 때 씁니다.','확인 다이얼로그|warning dialog|cancel confirm','overlay'),
+  catalogEntry('color-well','macOS','컬러 웰','Color Well','NSColorWell','현재 색을 보여주고 색상 선택기를 여는 작은 스와치 버튼입니다.','스타일 속성의 색을 직접 보고 바꾸게 할 때 씁니다.','색상 스와치|color picker trigger|fill color','input'),
+  catalogEntry('three-dots','Web','오버플로 메뉴','The Three Dots (Overflow Menu)','<button>','가로 점·세로 점·햄버거·말줄임표가 서로 다른 의미를 가진다는 것을 구분하는 메뉴 패턴입니다.','드물게 쓰는 행동을 숨기되, 아이콘 자체의 의미를 명확히 해야 할 때 씁니다.','케밥 메뉴|미트볼 메뉴|ellipsis menu','menu'),
+  catalogEntry('drag-and-drop','Web','드래그 앤 드롭','Drag & Drop','ondrop','잡는 지점, 이동 중 미리보기, 놓을 위치 표시를 포함하는 직접 조작 패턴입니다.','순서를 바꾸거나 항목을 다른 컨테이너로 옮길 때 씁니다.','끌어놓기|drag handle|drop target','drag'),
+  catalogEntry('divider','Web','디바이더 · 세퍼레이터 · 룰','Divider vs. Separator vs. Rule','<hr>','얇은 선으로 주제 전환, 컨트롤 구분, 장식 역할을 나누는 패턴입니다.','밀도 높은 화면에서 관계없는 묶음을 시각적으로 분리할 때 씁니다.','구분선|separator|horizontal rule','divider'),
+  catalogEntry('dialog-drawer-sheet','Web','모달 · 드로어 · 시트','Modal Dialog vs. Drawer vs. Sheet','<dialog>','화면 위에 뜨는 세 가지 패턴을 위치·범위·작업 깊이로 구분합니다.','흐름을 멈출지, 옆에서 편집할지, 작은 화면에서 전환할지 정할 때 씁니다.','modal|side drawer|bottom sheet','overlay'),
+  catalogEntry('combobox','Web','콤보박스','Combobox (Autocomplete / Typeahead)','role="combobox"','입력한 글자에 따라 선택 가능한 제안을 걸러 보여주는 입력과 목록의 조합입니다.','많은 선택지에서 검색과 선택을 한 흐름으로 이어야 할 때 씁니다.','자동완성|typeahead|searchable select','input'),
+  catalogEntry('command-palette','Web','커맨드 팔레트','Command Palette','Command','키보드 중심으로 명령·탐색 대상을 검색해 실행하는 런처입니다.','전문 사용자가 빠르게 행동과 페이지를 오가게 할 때 씁니다.','명령 검색|cmd k|action launcher','menu'),
+  catalogEntry('badge-chip-pill','Web','배지 · 칩 · 필 · 태그','Badge vs. Chip vs. Pill vs. Tag','Badge','짧은 라벨을 의미·모양·상호작용성에 따라 구분하는 컴포넌트 묶음입니다.','상태, 분류, 제거 가능한 선택값을 작은 면적으로 표시할 때 씁니다.','상태 배지|태그|필 라벨','badge'),
+  catalogEntry('breadcrumbs','Web','브레드크럼','Breadcrumbs','<nav>','현재 페이지에서 상위 계층까지 되짚어 가는 탐색 경로입니다.','깊은 정보 구조 안에서 위치와 상위 이동 경로를 보여줄 때 씁니다.','경로 탐색|hierarchy trail|상위 경로','navigation'),
+  catalogEntry('sticky-fixed','Web','스티키 · 픽스드','Sticky vs. Fixed Positioning','position: sticky','보이는 위치를 유지하는 두 방식의 기준 컨테이너와 스크롤 동작을 구분합니다.','목록 헤더·작업 바처럼 스크롤 중에도 필요하지만 문서 흐름을 고려해야 할 때 씁니다.','고정 헤더|sticky panel|fixed position','layout'),
+  catalogEntry('focus-ring-web','Web','웹 포커스 링','Focus Ring (:focus-visible)',':focus-visible','키보드 입력일 때만 현재 컨트롤을 명확히 드러내는 웹 윤곽입니다.','마우스 사용자에게 불필요한 테두리를 늘리지 않고 키보드 경로를 보일 때 씁니다.','focus visible|keyboard outline|tab focus','focus'),
+  catalogEntry('hover-card','Web','호버 카드','Hover Card','HoverCard','링크나 사용자 정보 위에 풍부한 미리보기를 비모달로 띄우는 카드입니다.','맥락을 잃지 않고 프로필·요약 정보를 미리 보여줄 때 씁니다.','프로필 미리보기|rich tooltip|hover preview','hover'),
+  catalogEntry('switch-checkbox-radio','Web','스위치 · 체크박스 · 라디오','Switch vs. Checkbox vs. Radio','<input type="checkbox">','켜기/끄기 설정, 여러 독립 선택, 하나만 고르는 선택을 구분하는 기본 컨트롤입니다.','값의 즉시 적용 여부와 선택 개수를 먼저 정한 뒤 적절한 컨트롤을 고를 때 씁니다.','토글|체크|단일 선택','controls'),
+  catalogEntry('toggle-group','Web','토글 그룹','Toggle Group (Segmented Control)','ToggleGroup','붙어 있는 작은 옵션 중 하나 또는 여러 개를 지속적으로 선택하는 컨트롤입니다.','간단한 정렬·보기·서식 상태를 빠르게 바꿀 때 씁니다.','세그먼트|보기 전환|compact options','controls'),
+  catalogEntry('lightbox','Web','라이트박스','Lightbox','<dialog>','이미지를 크게 보이게 하면서 뒤 페이지를 어둡게 낮추는 오버레이입니다.','갤러리 이미지나 세부 시각 자료를 문맥을 유지한 채 확대할 때 씁니다.','이미지 확대|photo viewer|gallery overlay','overlay'),
+  catalogEntry('marquee','Web','마키','Marquee','animation + @keyframes translateX','콘텐츠가 옆으로 반복 이동하는 연속 스크롤 효과입니다.','짧은 로고·키워드 흐름을 장식적으로 보여주되, 필수 정보에는 쓰지 않을 때 씁니다.','가로 자동 스크롤|infinite ticker|logo strip','marquee')
+];
+entries.push(...referenceAdditions);
+
+const heroSearch = document.getElementById('hero-search');
+const resultList = document.getElementById('result-list');
+const resultCount = document.getElementById('result-count');
+
+function normalized(value){
+  return String(value || '').toLowerCase().replace(/\s+/g,' ').trim();
 }
-document.addEventListener('click',function(e){
-  var c=e.target.closest('[data-c]'); if(c){curCase=CASES.find(function(x){return x.id===c.dataset.c;});chips();renderMini();return;}
-  var s=e.target.closest('[data-s]'); if(s){curStyle=STYLES.find(function(x){return x.id===s.dataset.s;});chips();renderMini();}
+function matches(entry, query){
+  const haystack = [entry.ko,entry.en,entry.group,entry.groupLabel,entry.definition,entry.use,entry.confusion,entry.prompt,...entry.aliases].join(' ');
+  const normalizedHaystack = normalized(haystack);
+  const normalizedQuery = normalized(query);
+  if (normalizedHaystack.includes(normalizedQuery)) return true;
+  const tokens = normalizedQuery.split(' ').filter(Boolean);
+  const matchedTokens = tokens.filter(token => normalizedHaystack.includes(token)).length;
+  return matchedTokens >= Math.max(1, Math.ceil(tokens.length * .6));
+}
+function visibleEntries(){
+  const query = heroSearch.value;
+  return entries.filter(entry => !query || matches(entry, query));
+}
+function sourcesFor(entry){
+  return [...new Set(['namethatui', ...(sourceByEntry[entry.id] || ['vds-reference'])])]
+    .map(key => sourceLibrary[key])
+    .filter(Boolean);
+}
+function previewMarkup(entry){
+  const id = entry.id;
+  const previews = {
+    scrim:`<div class="preview-ui preview-scrim"><div class="preview-header"></div><div class="preview-lines"></div><div class="preview-modal"><b>새 프로젝트</b><i></i><span class="preview-button">계속</span></div></div>`,
+    'form-field':`<div class="preview-ui preview-placeholder"><div class="preview-input"></div></div>`,
+    slider:`<div class="preview-ui preview-slider"><div class="preview-header"></div><div class="preview-range"></div></div>`,
+    truncation:`<div class="preview-ui preview-truncation"><div class="ellipsis-line">프로젝트의 화면 언어를</div></div>`,
+    'popover-dropdown-tooltip':`<div class="preview-ui preview-tooltip"><div class="tooltip-bubble">공유 링크를 복사합니다</div><div class="tooltip-icon">?</div></div>`,
+    'macos-popover':`<div class="preview-ui preview-popover"><span class="popover-trigger">옵션</span><div class="popover-card"><b>보기 설정</b><i></i></div></div>`,
+    'macos-sidebar':`<div class="preview-ui preview-sidebar"><div class="sidebar-frame"><div class="sidebar-rail"><i></i><i></i><i></i><i></i></div><div class="sidebar-main"></div></div></div>`,
+    'segmented-control':`<div class="preview-ui preview-segmented"><div class="segment"><span>목록</span><span>카드</span><span>표</span></div></div>`,
+    'skeleton-spinner':`<div class="preview-ui preview-skeleton"><div class="skeleton-card"><div class="skeleton-block"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>`,
+    toast:`<div class="preview-ui preview-toast"><div class="toast-shell"><div class="toast-lines"></div></div><div class="toast-message">저장했습니다</div></div>`,
+    accordion:`<div class="preview-ui preview-accordion"><div class="accordion-box"><div class="accordion-row"><span>프로젝트 정보</span><span>−</span></div><div class="accordion-detail">작업 맥락과 다음 단계를 표시합니다.</div><div class="accordion-row"><span>세부 설정</span><span>+</span></div></div></div>`,
+    'empty-state':`<div class="preview-ui preview-empty"><div class="empty-state"><div class="empty-icon"></div><b>아직 프로젝트가 없습니다</b><span>새로 만들기</span></div></div>`,
+    tabs:`<div class="preview-ui preview-tabs"><div class="tabs-demo"><span>개요</span><span>인사이트</span><span>활동</span><i></i></div></div>`,
+    'progress-indicators':`<div class="preview-ui preview-progress"><div class="progress-shell"><b>업로드 중 · 64%</b><div class="progress-track"></div></div></div>`
+  };
+  const generic = {
+    menu:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-menu"><span>열기</span><span>이름 변경</span><span>복제</span></div></div></div>`,
+    tree:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-tree"><span>Documents</span><span>Projects</span><span>Archive</span><span>Notes</span></div></div></div>`,
+    status:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-lines"></div><div class="g-badge">VDS</div></div></div>`,
+    focus:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-focus"></div></div></div>`,
+    panel:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-lines"></div><div class="g-inspector"></div></div></div>`,
+    controls:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-control-row"><i></i><i></i><i></i></div></div></div>`,
+    overlay:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-lines"></div><div class="g-overlay"></div><div class="g-dialog">확인이 필요합니다</div></div></div>`,
+    navigation:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-nav">Home / Project / Detail</div><div class="g-lines"></div></div></div>`,
+    layout:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-layout"></div></div></div>`,
+    scroll:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-lines"></div><div class="g-scrollbar"></div></div></div>`,
+    input:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-input">입력하거나 선택하세요</div></div></div>`,
+    feedback:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-feedback">현재 상태 · 58%</div></div></div>`,
+    window:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-lines"></div></div></div>`,
+    pointer:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-pointer"></div></div></div>`,
+    drag:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-drag-list"><i></i><i></i><i></i></div></div></div>`,
+    divider:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-divider"></div></div></div>`,
+    badge:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-badges"><i>Design</i><i>Active</i><i>7</i></div></div></div>`,
+    hover:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-hover-card">Jane Appleseed<br><small>Design systems</small></div></div></div>`,
+    marquee:`<div class="preview-ui preview-generic"><div class="g-window"><div class="g-title"></div><div class="g-marquee"><span>Vertex · Orbit · Quadra · Nova · Prism · Vertex · Orbit · Quadra · Nova · Prism</span></div></div></div>`
+  };
+  return previews[id] || generic[entry.preview] || `<div class="preview-ui"><div class="preview-header"></div><div class="preview-lines"></div></div>`;
+}
+function renderResults(){
+  const visible = visibleEntries();
+  resultCount.textContent = `${visible.length} visual card${visible.length === 1 ? '' : 's'}`;
+  if (!visible.length){
+    resultList.innerHTML = '<div class="empty">일치하는 카드가 없습니다. 위치·모양·사용 중 일어나는 일을 더 구체적으로 적어 보세요.</div>';
+    return;
+  }
+  resultList.innerHTML = visible.map(entry => {
+    const sources = sourcesFor(entry);
+    const cue = entry.cues[0];
+    return `<article class="visual-card"><div class="visual-preview">${previewMarkup(entry)}</div><div class="visual-card-body"><div class="visual-card-meta"><span>${entry.groupLabel}</span><span>${entry.id}</span></div><h3>${entry.ko}</h3><p>${entry.en}</p><p class="visual-description">${entry.definition}</p><div class="visual-instruction"><b>이렇게 설명</b> · ${entry.use}</div><div class="visual-token"><span>${cue[0]} · ${cue[1]}</span><button class="visual-copy" type="button" data-copy="${entry.id}">복사</button></div></div><div class="visual-card-sources" aria-label="${entry.ko} 관련 자료">${sources.map(source => `<a href="${source.href}" target="_blank" rel="noreferrer">${source.label} ↗</a>`).join('')}</div></article>`;
+  }).join('');
+  initVisualPreviews();
+}
+let visualObserver;
+function initVisualPreviews(){
+  if (visualObserver) visualObserver.disconnect();
+  if (!('IntersectionObserver' in window)){
+    document.querySelectorAll('.visual-preview').forEach(preview => preview.classList.add('run'));
+    return;
+  }
+  visualObserver = new IntersectionObserver(records => {
+    records.forEach(record => record.target.classList.toggle('run', record.isIntersecting));
+  }, {threshold:.12});
+  document.querySelectorAll('.visual-preview').forEach(preview => visualObserver.observe(preview));
+}
+function render(){
+  renderResults();
+}
+resultList.addEventListener('click', event => {
+  const button = event.target.closest('[data-copy]');
+  if (!button) return;
+  const entry = entries.find(item => item.id === button.dataset.copy);
+  if (!entry) return;
+  const original = button.textContent;
+  navigator.clipboard?.writeText(entry.prompt).then(() => {
+    button.textContent = '복사됨';
+    setTimeout(() => {button.textContent = original;}, 1200);
+  }).catch(() => {
+    button.textContent = '실패';
+    setTimeout(() => {button.textContent = original;}, 1200);
+  });
 });
-function cpInstr(b){var t=document.getElementById('instr').textContent;navigator.clipboard&&navigator.clipboard.writeText(t);b.textContent='✓';setTimeout(function(){b.textContent='복사';},1200);}
-chips();renderMini();
-
-/* ===== premium: 스크롤 리빌 + 3D 틸트 (Behance 3D 쇼케이스 감성) ===== */
-(function(){
-  var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var els=[].slice.call(document.querySelectorAll('h2,.sec-sub,.fcard,.step,.studio,.stat'));
-  els.forEach(function(e){e.classList.add('reveal');});
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12});
-    els.forEach(function(e){io.observe(e);});
-  } else els.forEach(function(e){e.classList.add('in');});
-  if(!rm){[].slice.call(document.querySelectorAll('.fcard')).forEach(function(c){
-    c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-      c.style.transform='perspective(720px) rotateY('+(x*9)+'deg) rotateX('+(-y*9)+'deg) translateY(-4px)';});
-    c.addEventListener('pointerleave',function(){c.style.transform='';});
-  });}
-})();
+heroSearch.addEventListener('input', render);
+document.querySelectorAll('[data-example]').forEach(button => {
+  button.addEventListener('click', () => {
+    heroSearch.value = button.dataset.example;
+    render();
+    document.getElementById('lexicon').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+document.addEventListener('keydown', event => {
+  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k'){
+    event.preventDefault();
+    heroSearch.focus();
+  }
+  if (event.key === 'Enter' && document.activeElement === heroSearch){
+    document.getElementById('lexicon').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+});
+render();
 </script>
 </body>
 </html>
